@@ -32,5 +32,11 @@ Route::get('/product-new', function () {
     return view('pages.product-new');
 });
 
+Route::get('/stock-in', function () {
+    return view('pages.stock-in');
+});
 
+Route::get('/stock-transfer', function () {
+    return view('pages.stock-transfer');
+});
 

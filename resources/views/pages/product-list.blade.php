@@ -14,18 +14,18 @@
     <div class="col-12">
         <div class="card card-outline-inverse">
             <div class="card-header">
-                <h4 class="m-b-0 text-white">รายการสินค้า</h4></div>
+                <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right"><i class="mdi mdi-library-plus"></i> เพิ่มสินค้า</button>
+                <h4 class="m-b-0 text-white">รายการสินค้า</h4>
+            </div>
             <div class="card-body">
                 <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
                     <thead>
                     <tr>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Movie Title</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">Rank</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Year</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">
-                            <abbr title="Rotten Tomato Rating">Rating</abbr>
-                        </th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Gross</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ชื่อสินค้า</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">ยี่ห้อ</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">รุ่น</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">ราคา</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,11 @@
                         <td>1</td>
                         <td>2009</td>
                         <td>83%</td>
-                        <td>$2.7B</td>
+                        <td>
+                            <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
+                            <button type="button" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
+                            <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
+                        </td>
                     </tr>
                     <tr>
                         <td class="title"><a class="link" href="javascript:void(0)">Titanic</a></td>

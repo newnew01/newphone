@@ -14,77 +14,96 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">
-                <h4 class="card-title">เลือกประเภทสินค้า</h4>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs customtab" role="tablist">
-                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">โทรศัพท์มือถือ</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">อุปกรณ์เสริมและอื่นๆ</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="home2" role="tabpanel">
-                    <div class="p-20">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card card-outline-inverse">
-                                    <div class="card-header">
-                                        <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4></div>
-                                    <div class="card-body">
-                                        <form class="form p-t-20">
-                                            <div class="form-group">
-                                                <label for="exampleInputuname">ยี่ห้อ</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
-                                                    <select class="form-control custom-select">
-                                                        <option value="">Male</option>
-                                                        <option value="">Female</option>
-                                                    </select>
-                                                    <span class="input-group-btn">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-outline-inverse">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="switch">
+
+                                    <label>เปิดใช้ SN / IMEI ?
+                                        <input type="checkbox"><span class="lever switch-col-red"></span></label>
+                                </div>
+                                <div class="form-group p-t-20">
+                                    <label for="exampleInputEmail1">บาร์โค้ด</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="บาร์โค้ด">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">ชื่อสินค้า</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="mdi mdi-tag-text-outline"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="ชื่อสินค้า">
+                                    </div>
+                                </div>
+                                <form class="form">
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">ยี่ห้อ</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
+                                            <select class="form-control custom-select">
+                                                <option value="">VIVO</option>
+                                                <option value="">OPPO</option>
+                                            </select>
+                                            <span class="input-group-btn">
                                                     <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</button>
                                                 </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">รุ่น</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="รุ่น">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">รายละเอียด</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="รายละเอียด">
-                                                </div>
-                                            </div>
-
-
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">รูปภาพสินค้า</h4>
-                                        <input type="file" id="input-file-now-custom-2" class="dropify" data-height="300" />
-
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">รุ่น</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="รุ่น">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">หมวดหมู่</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
+                                            <select class="form-control custom-select">
+                                                <option value="">โทรศัพท์มือถือ</option>
+                                                <option value="">อุปกรณ์เสริม</option>
+                                            </select>
+                                            <span class="input-group-btn">
+                                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</button>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">รายละเอียด</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="รายละเอียด">
+                                        </div>
+                                    </div>
+
+
+                                </form>
                             </div>
-                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
-                            <button type="submit" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
                         </div>
+                    </div>
 
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">รูปภาพสินค้า</h4>
+                                <input type="file" id="input-file-now-custom-2" class="dropify" data-height="300" />
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 p-b-20">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
+                        <button type="submit" class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
                     </div>
                 </div>
-                <div class="tab-pane  p-20" id="profile2" role="tabpanel">2</div>
-                <div class="tab-pane p-20" id="messages2" role="tabpanel">3</div>
-            </div>
         </div>
     </div>
     </div>
@@ -98,7 +117,7 @@
 
 @section('js-bottom')
     <!--Wave Effects -->
-        <script src="js/waves.js"></script>
+        <!--script src="js/waves.js"></script-->
     <!--stickey kit -->
         <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
