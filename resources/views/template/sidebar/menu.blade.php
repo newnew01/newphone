@@ -7,22 +7,24 @@
 
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">สินค้า <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="index.html">เพิ่มสินค้า </a></li>
-                <li><a href="index2.html">รายการสินค้า</a></li>
-                <li><a href="index3.html">บาร์โค้ด</a></li>
+                <li><a href="/product-new">เพิ่มสินค้า </a></li>
+                <li><a href="/product-list">รายการสินค้า</a></li>
+                <li><a href="barcode">บาร์โค้ด</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">สต๊อคสินค้า <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="index.html">รับสินค้าเข้า </a></li>
-                <li><a href="index2.html">โอนสินค้า</a></li>
-                <li><a href="index3.html">รายการสต๊อค</a></li>
+                <li><a href="stock-in">รับสินค้าเข้า </a></li>
+                <li><a href="stock-transfer">โอนสินค้า</a></li>
+                <li><a href="stock-list">รายการสต๊อค</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">การขาย <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="index.html">ขายใหม่ </a></li>
-                <li><a href="index2.html">รายการขาย</a></li>
+                <li><a href="sale-neworder">ขายใหม่ </a></li>
+                <li><a href="sale-list">รายการขาย</a></li>
+                <li><a href="sale-topup">เติมเงิน</a></li>
+                <li><a href="sale-service">บิลบริการ</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Apps</span></a>
