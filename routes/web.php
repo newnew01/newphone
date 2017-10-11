@@ -42,9 +42,7 @@ Route::get('/stock-list', function () {
     return view('pages.stock-list');
 });
 
-<<<<<<< HEAD
 
-=======
 Route::get('/sale-neworder', function () {
     return view('pages.sale-neworder');
 });
@@ -52,4 +50,3 @@ Route::get('/sale-neworder', function () {
 Route::get('/sale-list', function () {
     return view('pages.sale-list');
 });
->>>>>>> 505b5e1913bb1dbea13e67118df8bbd43bb504e0
