@@ -40,3 +40,8 @@ Route::get('/stock-transfer', function () {
     return view('pages.stock-transfer');
 });
 
+Route::get('/stock-list', function () {
+    return view('pages.stock-list');
+});
+
+
