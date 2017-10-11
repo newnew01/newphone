@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoiceDetailTable extends Migration
+class CreateTopupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_detail', function (Blueprint $table) {
+        Schema::create('topup', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('invoice_id');
-            $table->integer('product_id');
-            $table->double('discount');
-            $table->string('sn');
-            $table->integer('amount');
-            $table->boolean('free_gift');
-
+            $table->string('tel_no');
+            $table->integer('price');
+            $table->integer('provider');
         });
     }
 
@@ -33,6 +29,6 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_detail');
+        Schema::dropIfExists('topup');
     }
 }

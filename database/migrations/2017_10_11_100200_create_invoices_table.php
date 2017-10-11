@@ -25,6 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->string('customer_ampher');
             $table->string('customer_province');
             $table->string('customer_zipcode');
+            $table->string('customer_tel');
             $table->integer('employee_id');
         });
     }
