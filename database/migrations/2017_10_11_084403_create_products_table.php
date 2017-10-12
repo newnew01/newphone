@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->integer('amount')->default(0);
             $table->boolean('type_sn');
-            $table->string('barcode')->nullable();
+            $table->string('barcode')->nullable()->unique();
             $table->string('image')->nullable();
         });
     }
