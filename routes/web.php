@@ -26,9 +26,8 @@ Route::get('/product-list', function () {
     return view('pages.product-list');
 });
 
-Route::get('/product-new', function () {
-    return view('pages.product-new');
-});
+Route::get('/product-new','ProductNewController@index');
+Route::post('/product-new','ProductNewController@store');
 
 Route::get('/stock-in', function () {
     return view('pages.stock-in');

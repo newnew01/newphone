@@ -19,10 +19,12 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->integer('brand_id');
             $table->string('model');
+            $table->integer('category_id');
             $table->string('description');
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
             $table->boolean('type_sn');
             $table->string('barcode');
+            $table->string('image');
         });
     }
 
