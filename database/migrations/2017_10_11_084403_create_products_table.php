@@ -18,13 +18,13 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->string('product_name');
             $table->integer('brand_id');
-            $table->string('model');
+            $table->string('model')->nullable();
             $table->integer('category_id');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('amount')->default(0);
             $table->boolean('type_sn');
-            $table->string('barcode');
-            $table->string('image');
+            $table->string('barcode')->nullable();
+            $table->string('image')->nullable();
         });
     }
 

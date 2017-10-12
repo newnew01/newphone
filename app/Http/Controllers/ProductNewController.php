@@ -13,22 +13,13 @@ class ProductNewController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-        $product = new Product;
-
-        $product->product_name = $request->input('product_name');
-        $product->brand_id = $request->input('brand_id');
-        $product->model = $request->input('model');
-        $product->category_id = $request->input('category_id');
-        $product->description = $request->input('description');
-        $product->barcode = $request->input('barcode');
-        $product->image = $request->input('image');
-
-        if($request->input('type_sn') == 'on')
-            $product->type_sn = true;
+        $product = $request->all();
+        if($request->has('type_sn'))
+            $product['type_sn'] = true;
         else
-            $product->type_sn = false;
-        $product->save();
+            $product['type_sn'] = false;
+
+        Product::create($product);
 
         return redirect('/product-new');
     }
