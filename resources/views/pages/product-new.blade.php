@@ -24,12 +24,12 @@
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
                                 </div>
-                                <div class="card-body">cvxcv
+                                <div class="card-body">
 
                                         <div class="switch">
-
                                             <label>เปิดใช้ SN / IMEI ?
-                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span></label>
+                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span>
+                                            </label>
                                         </div>
                                         <div class="form-group p-t-20">
 
@@ -122,62 +122,86 @@
 @endsection
 
 @section('js-bottom')
-    <!--Wave Effects -->
-        <!--script src="js/waves.js"></script-->
-    <!--stickey kit -->
-        <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-        <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!-- jQuery file upload -->
-        <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                // Basic
-                $('.dropify').dropify();
+<!--Wave Effects -->
+    <!--script src="js/waves.js"></script-->
+<!--stickey kit -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jQuery file upload -->
+    <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
 
-                // Translated
-                $('.dropify-fr').dropify({
-                    messages: {
-                        default: 'Glissez-déposez un fichier ici ou cliquez',
-                        replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                        remove: 'Supprimer',
-                        error: 'Désolé, le fichier trop volumineux'
-                    }
-                });
-
-                // Used events
-                var drEvent = $('#input-file-events').dropify();
-
-                drEvent.on('dropify.beforeClear', function(event, element) {
-                    return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-                });
-
-                drEvent.on('dropify.afterClear', function(event, element) {
-                    alert('File deleted');
-                });
-
-                drEvent.on('dropify.errors', function(event, element) {
-                    console.log('Has Errors');
-                });
-
-                var drDestroy = $('#input-file-to-destroy').dropify();
-                drDestroy = drDestroy.data('dropify')
-                $('#toggleDropify').on('click', function(e) {
-                    e.preventDefault();
-                    if (drDestroy.isDropified()) {
-                        drDestroy.destroy();
-                    } else {
-                        drDestroy.init();
-                    }
-                })
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
             });
-        </script>
 
-        <!-- ============================================================== -->
-        <!-- Style switcher -->
-        <!-- ============================================================== -->
-        <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+    </script>
+
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
+
+    <script>
+
+        @if(Session::has('flash_message'))
+            $.toast({
+                heading: 'สำเร็จ',
+                text: '{!! session('flash_message') !!}',
+                position: 'top-right',
+                loaderBg:'#ff6849',
+                icon: 'success',
+                hideAfter: 3500,
+                stack: 6
+            });
+        @endif
+    </script>
 @endsection
 
 @section('css-head')
-        <link rel="stylesheet" href="../assets/plugins/dropify/dist/css/dropify.min.css">
+    <link rel="stylesheet" href="../assets/plugins/dropify/dist/css/dropify.min.css">
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+
 @endsection
