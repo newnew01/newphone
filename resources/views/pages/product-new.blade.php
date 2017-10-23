@@ -81,6 +81,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label>ราคา</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
+                                                <input type="text" class="form-control" name="price" placeholder="ราคา">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label>รายละเอียด</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>

@@ -22,9 +22,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/product-list', function () {
-    return view('pages.product-list');
-});
+Route::get('/product-list','ProductListController@index');
 
 Route::get('/product-new','ProductNewController@index');
 Route::post('/product-new','ProductNewController@store');
