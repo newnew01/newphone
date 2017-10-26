@@ -32,7 +32,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td class="title"><a class="link" href="javascript:void(0)">{{$product->product_name}}</a></td>
-                            <td>{{$product->brand_id}}</td>
+                            <td>{{$product->brand->brand_name}}</td>
                             <td>{{$product->model}}</td>
                             <td>{{$product->price}}</td>
                             <td>

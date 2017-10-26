@@ -32,8 +32,6 @@
                                             </label>
                                         </div>
                                         <div class="form-group p-t-20">
-
-                                            <label>บาร์โค้ด</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
                                                 <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด">
@@ -41,17 +39,16 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>ชื่อสินค้า</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-tag-text-outline"></i></div>
                                                 <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>ยี่ห้อ</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
                                                 <select class="form-control custom-select" name="brand_id">
+                                                    <option value="-1">[ยี่ห้อ]</option>
                                                     <option value="1">VIVO</option>
                                                     <option value="2">OPPO</option>
                                                 </select>
@@ -61,17 +58,16 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>รุ่น</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
                                                 <input type="text" class="form-control" name="model" placeholder="รุ่น">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>หมวดหมู่</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
                                                 <select class="form-control custom-select" name="category_id">
+                                                    <option value="-1">[หมวดหมู่]</option>
                                                     <option value="1">โทรศัพท์มือถือ</option>
                                                     <option value="2">อุปกรณ์เสริม</option>
                                                 </select>
@@ -81,14 +77,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>ราคา</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
                                                 <input type="text" class="form-control" name="price" placeholder="ราคา">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>รายละเอียด</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
                                                 <input type="text" class="form-control" name="description" placeholder="รายละเอียด">

@@ -26,6 +26,7 @@ Route::get('/product-list','ProductListController@index');
 
 Route::get('/product-new','ProductNewController@index');
 Route::post('/product-new','ProductNewController@store');
+Route::get('/product-catebrand','ProductCateBrandController@index');
 
 Route::get('/stock-in', function () {
     return view('pages.stock-in');
