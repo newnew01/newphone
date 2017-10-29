@@ -22,7 +22,7 @@
                     <thead>
                     <tr>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการหมวดหมู่</th>
-                        <th width="20%"></th>
+                        <th width="100px"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@
                     <thead>
                     <tr>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการยี่ห้อ</th>
-                        <th width="20%"></th>
+                        <th width="100px"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,17 +81,20 @@
                     <h4 class="modal-title" id="exampleModalLabel1">เพิ่มหมวดหมู่</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="category_name">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary">เพิ่ม</button>
-                </div>
+                <form class="form" method="post" action="{{url('product-catebrand')}}">
+                    <div class="modal-body">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="กรุณากรอกหมวดหมู่" name="category_name">
+                                <input type="hidden" name="form_type" value="category_name">
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary">เพิ่ม</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -103,17 +106,20 @@
                     <h4 class="modal-title" id="exampleModalLabel1">เพิ่มยี่ห้อ</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="brand_name">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" class="btn btn-primary">เพิ่ม</button>
-                </div>
+                <form class="form" method="post" action="{{url('product-catebrand')}}">
+                    <div class="modal-body">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อ" name="brand_name">
+                                <input type="hidden" name="form_type" value="brand_name">
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                        <button type="button" class="btn btn-primary">เพิ่ม</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

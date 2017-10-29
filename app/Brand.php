@@ -10,4 +10,12 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    static public function isDuplucated($brand)
+    {
+        if(Brand::where('brand_name','=',$brand)->exists())
+        {
+            return tr
+        }
+    }
 }
