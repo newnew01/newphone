@@ -10,4 +10,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    static public function isDuplicated($cate)
+    {
+        return Category::where('cate_name','=',$cate)->exists();
+    }
 }

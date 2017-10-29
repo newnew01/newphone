@@ -25,4 +25,6 @@
 <!-- ============================================================== -->
 <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
+
 @yield('js-bottom')
+

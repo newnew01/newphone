@@ -30,8 +30,8 @@
                         <tr>
                             <td class="title">{{$category->cate_name}}</td>
                             <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
+                                <a href="/product-catebrand/delete-category/{{$category->id}}" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</a>
+                                <a href="/product-catebrand/delete-category/{{$category->id}}" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</a>
                             </td>
                         </tr>
                     @endforeach
@@ -61,8 +61,8 @@
                         <tr>
                             <td class="title">{{$brand->brand_name}}</td>
                             <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
+                                <a href="/product-catebrand/edit-brand/{{$brand->id}}" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</a>
+                                <a href="/product-catebrand/delete-brand/{{$brand->id}}" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</a>
                             </td>
                         </tr>
                     @endforeach
@@ -82,6 +82,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form class="form" method="post" action="{{url('product-catebrand')}}">
+                    {{csrf_field()}}
                     <div class="modal-body">
 
                             <div class="form-group">
@@ -107,6 +108,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form class="form" method="post" action="{{url('product-catebrand')}}">
+                    {{csrf_field()}}
                     <div class="modal-body">
 
                             <div class="form-group">
@@ -116,8 +118,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-primary">เพิ่ม</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary">เพิ่ม</button>
                     </div>
                 </form>
             </div>
@@ -133,9 +135,19 @@
     <!-- jQuery peity -->
     <script src="../assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
     <script src="../assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
+
+    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
+    @include('template.flash-msg');
+
 @endsection
 
 @section('css-head')
     <!-- Bootstrap responsive table CSS -->
     <link href="../assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
 @endsection

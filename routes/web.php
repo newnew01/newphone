@@ -26,7 +26,11 @@ Route::get('/product-list','ProductListController@index');
 
 Route::get('/product-new','ProductNewController@index');
 Route::post('/product-new','ProductNewController@store');
+
 Route::get('/product-catebrand','ProductCateBrandController@index');
+Route::post('/product-catebrand','ProductCateBrandController@store');
+Route::get('/product-catebrand/delete-brand/{id}','ProductCateBrandController@deleteBrand');
+Route::get('/product-catebrand/delete-category/{id}','ProductCateBrandController@deleteCategory');
 
 Route::get('/stock-in', function () {
     return view('pages.stock-in');
@@ -47,4 +51,12 @@ Route::get('/sale-neworder', function () {
 
 Route::get('/sale-list', function () {
     return view('pages.sale-list');
+});
+
+
+Route::get('/test-session',function (){
+    $x['title'] = 'my title';
+    $x['text'] = 'my text';
+    \Session::flash('flash_test',$x);
+    dd(session('flash_test'));
 });

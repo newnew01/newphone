@@ -13,9 +13,7 @@ class Brand extends Model
 
     static public function isDuplucated($brand)
     {
-        if(Brand::where('brand_name','=',$brand)->exists())
-        {
-            return tr
-        }
+        return Brand::where('brand_name','=',$brand)->exists();
+
     }
 }

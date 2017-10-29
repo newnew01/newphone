@@ -31,7 +31,37 @@
                                                 <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span>
                                             </label>
                                         </div>
+
                                         <div class="form-group p-t-20">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
+                                                <select class="form-control custom-select" name="category_id">
+                                                    <option value="-1">[หมวดหมู่]</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                                                    @endforeach
+                                                </select>
+
+                                                <span class="input-group-btn">
+                                                <a  href="/product-catebrand"   class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
+                                                <select class="form-control custom-select" name="brand_id">
+                                                    <option value="-1">[ยี่ห้อ]</option>
+                                                    @foreach($brands as $brand)
+                                                        <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <a  href="/product-catebrand"   class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
                                                 <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด">
@@ -44,38 +74,14 @@
                                                 <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
-                                                <select class="form-control custom-select" name="brand_id">
-                                                    <option value="-1">[ยี่ห้อ]</option>
-                                                    <option value="1">VIVO</option>
-                                                    <option value="2">OPPO</option>
-                                                </select>
-                                                <span class="input-group-btn">
-                                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</button>
-                                                </span>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
                                                 <input type="text" class="form-control" name="model" placeholder="รุ่น">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
-                                                <select class="form-control custom-select" name="category_id">
-                                                    <option value="-1">[หมวดหมู่]</option>
-                                                    <option value="1">โทรศัพท์มือถือ</option>
-                                                    <option value="2">อุปกรณ์เสริม</option>
-                                                </select>
-                                                <span class="input-group-btn">
-                                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</button>
-                                                </span>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
@@ -177,22 +183,11 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
     <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
 
-    <script>
+    @include('template.flash-msg');
 
-        @if(Session::has('flash_message'))
-            $.toast({
-                heading: 'สำเร็จ',
-                text: '{!! session('flash_message') !!}',
-                position: 'top-right',
-                loaderBg:'#ff6849',
-                icon: 'success',
-                hideAfter: 3500,
-                stack: 6
-            });
-        @endif
-    </script>
 @endsection
 
 @section('css-head')

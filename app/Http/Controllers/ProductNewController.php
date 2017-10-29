@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -9,7 +11,12 @@ use Illuminate\Support\Facades\Session;
 class ProductNewController extends Controller
 {
     public function index(){
-        return view('pages.product-new');
+        $brands = Brand::all();
+        $categories = Category::all();
+
+        return view('pages.product-new')->
+                with(compact('brands'))->
+                with(compact('categories'));
     }
 
     public function store(Request $request)
@@ -21,7 +28,7 @@ class ProductNewController extends Controller
             $product['type_sn'] = false;
 
         Product::create($product);
-        \Session::flash('flash_message','เพิ่มข้อมูลสำเร็จ!');
+        \Session::flash('flash_msg_success',['title' => 'สำเร็จ','text' => 'เพิ่มข้อมูลสำเร็จ']);
         return redirect('/product-new');
     }
 
