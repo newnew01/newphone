@@ -53,6 +53,9 @@ Route::get('/sale-list', function () {
     return view('pages.sale-list');
 });
 
+Route::get('/service-product/find-by-barcode/{barcode}','ServiceProductController@findProductByBarcode');
+
+
 
 Route::get('/test-session',function (){
     $x['title'] = 'my title';

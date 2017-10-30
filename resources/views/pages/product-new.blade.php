@@ -11,6 +11,12 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row">
+
+
+
+
+
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">
@@ -22,6 +28,7 @@
                         <div class="col-md-6">
                             <div class="card card-outline-inverse">
                                 <div class="card-header">
+                                    <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" data-toggle="modal" data-target="#checkProduct" data-whatever="@mdo" ><i class="mdi mdi-library-plus"></i> ตรวจสอบสินค้า</button>
                                     <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
                                 </div>
                                 <div class="card-body">
@@ -120,6 +127,78 @@
         </div>
     </div>
     </div>
+
+    <div class="modal fade" id="checkProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel1">ตรวจสอบสินค้า</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                    <div class="modal-body" ng-app="newphoneApp" ng-controller="findProductByBarcode">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                            <input type="text" class="form-control" name="barcode_check" id="input_barcode_check" placeholder="บาร์โค้ด" ng-model="barcode">
+                            <span class="input-group-btn">
+                                <button ng-click="getProductInfo()"   class="btn waves-effect waves-light btn-success">ตรวจสอบ</button>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table m-t-10">
+                                    <tbody>
+                                    <tr>
+                                        <td width="100px" bgcolor="#d3d3d3"><b>ชื่อสินค้า</b></td>
+                                        <td><% product.product_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d3d3d3">หมวดหมู่</td>
+                                        <td><% product.cate_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d3d3d3">ยี่ห้อ</td>
+                                        <td><% product.brand_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d3d3d3">รุ่น</td>
+                                        <td><% product.model %></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d3d3d3">ราคา</td>
+                                        <td><% product.price %></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d3d3d3">รายละเอียด</td>
+                                        <td><% product.description %></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-t-20 p-l-20">
+                                    <img src="../assets/images/users/1.jpg" width="80%">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                <script>
+                    app.controller('findProductByBarcode', function($scope,$http) {
+                        $scope.product = '';
+
+                        $scope.getProductInfo = function () {
+                            $http.get("/service-product/find-by-barcode/"+$scope.barcode)
+                                .then(function(response) {
+                                    $scope.product = response.data;
+                                });
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -137,6 +216,12 @@
 <!-- jQuery file upload -->
     <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script>
+
+
+        $('#checkProduct').on('shown.bs.modal', function (e) {
+            document.getElementById('input_barcode_check').focus();
+        })
+
         $(document).ready(function() {
             // Basic
             $('.dropify').dropify();

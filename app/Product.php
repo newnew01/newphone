@@ -17,6 +17,14 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    static public function isDuplicatedBarcode($barcode)
+    {
+        if(Product::where('barcode','=',$barcode)->exists())
+            return true;
+        else
+            return false;
+    }
 }
 
 
