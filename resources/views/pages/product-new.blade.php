@@ -10,20 +10,13 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row">
-
-
-
-
-
-
+<div class="row" ng-app="newphoneApp">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">
-                <form class="form" method="post" action="/product-new">
+                <form class="form" method="post" action="/product-new" id="addProductForm">
 
                 <div class="row">
-
                         {{csrf_field()}}
                         <div class="col-md-6">
                             <div class="card card-outline-inverse">
@@ -68,10 +61,10 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" ng-controller="ProductNewController">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด">
+                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()">
                                             </div>
                                         </div>
 
@@ -135,10 +128,10 @@
                     <h4 class="modal-title" id="exampleModalLabel1">ตรวจสอบสินค้า</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                    <div class="modal-body" ng-app="newphoneApp" ng-controller="findProductByBarcode">
+                    <div class="modal-body"  ng-controller="ProductNewController">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                            <input type="text" class="form-control" name="barcode_check" id="input_barcode_check" placeholder="บาร์โค้ด" ng-model="barcode">
+                            <input type="text" class="form-control" name="barcode_check" id="input_barcode_check" placeholder="บาร์โค้ด" ng-model="barcode" ng-keyup="$event.keyCode == 13 && getProductInfo()">
                             <span class="input-group-btn">
                                 <button ng-click="getProductInfo()"   class="btn waves-effect waves-light btn-success">ตรวจสอบ</button>
                             </span>
@@ -184,18 +177,6 @@
                         </div>
 
                     </div>
-                <script>
-                    app.controller('findProductByBarcode', function($scope,$http) {
-                        $scope.product = '';
-
-                        $scope.getProductInfo = function () {
-                            $http.get("/service-product/find-by-barcode/"+$scope.barcode)
-                                .then(function(response) {
-                                    $scope.product = response.data;
-                                });
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>
@@ -208,7 +189,7 @@
 @endsection
 
 @section('js-bottom')
-<!--Wave Effects -->
+    <!--Wave Effects -->
     <!--script src="js/waves.js"></script-->
 <!--stickey kit -->
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
@@ -217,10 +198,6 @@
     <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script>
 
-
-        $('#checkProduct').on('shown.bs.modal', function (e) {
-            document.getElementById('input_barcode_check').focus();
-        })
 
         $(document).ready(function() {
             // Basic
@@ -261,6 +238,14 @@
                     drDestroy.init();
                 }
             })
+
+            /******************************/
+            document.getElementById('addProductForm').addEventListener('keypress', function(event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
+            });
+
         });
     </script>
 

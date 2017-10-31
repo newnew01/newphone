@@ -19,6 +19,6 @@ class ServiceProductController extends Controller
         }
 
         else
-            return null;
+            return 'null';
     }
 }
