@@ -21,4 +21,18 @@ class ServiceProductController extends Controller
         else
             return 'null';
     }
+
+    public function getGenBarcode()
+    {
+        $barcode = '11112222000001';
+        $p = Product::where('barcode','like','11112222%')->orderBy('barcode','desc');
+        if($p->count() > 0){
+            $barcode_ = $p->first()->barcode;
+            $number = explode('11112222',$barcode_)[1];
+            $number = sprintf("%06d", ++$number);
+            $barcode = '11112222'.$number;
+        }
+
+        return $barcode;
+    }
 }

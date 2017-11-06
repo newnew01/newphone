@@ -1,4 +1,4 @@
-var app = angular.module('newphoneApp', [], function($interpolateProvider) {
+var app = angular.module('newphoneApp', ['ngSanitize'], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });
@@ -12,7 +12,7 @@ app.directive('focusOn', function() {
 });
 
 
-app.controller('ProductNewController', function($scope,$http) {
+app.controller('ProductNewController', function($scope,$sce,$http) {
     $scope.product = '';
     $scope.barcode = '';
     $scope.barcode_ = '';
@@ -41,6 +41,40 @@ app.controller('ProductNewController', function($scope,$http) {
                 }
             });
     }
+
+    $scope.getGenBarcode = function () {
+        $http.get("/service-product/gen-barcode/")
+            .then(function(response) {
+                $scope.barcode_ = response.data;
+
+            });
+    }
+
+    $scope.startWebcam = function(){
+        //alert();
+        $scope.image_input = "";
+        document.getElementById('webcam_input').innerHTML =
+            '<div id="webcam"></div>' +
+            '<button type="button" class="btn  waves-effect waves-light btn-rounded btn-info pull-right m-t-20" onclick="captureWebcam()" >จับภาพ</button>';
+        //$scope.webcam_input = $sce.trustAsHtml('<div id="webcam"></div>' +
+        //    '<button type="button" class="btn  waves-effect waves-light btn-rounded btn-info pull-right m-t-20" onclick="captureWebcam()" >จับภาพ</button>');
+        $('#image_input').html('');
+
+        setTimeout(function(){
+            Webcam.set({
+                width: 390,
+                height: 294,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+            Webcam.attach( '#webcam' );
+        }, 1000)
+
+
+
+
+    }
+
 
 
     $('#checkProduct').on('shown.bs.modal', function (e) {

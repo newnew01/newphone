@@ -65,6 +65,9 @@
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
                                                 <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()">
+                                                <span class="input-group-btn">
+                                                    <span class="btn waves-effect waves-light btn-success" ng-click="getGenBarcode()">รันบาร์โค้ด</span>
+                                                </span>
                                             </div>
                                         </div>
 
@@ -102,10 +105,22 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="card">
+                            <div class="card" ng-controller="ProductNewController">
                                 <div class="card-body">
-                                    <h4 class="card-title">รูปภาพสินค้า</h4>
-                                    <input type="file" name="image" class="dropify" data-height="300" />
+                                    <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" ng-click="startWebcam()" ><i class="mdi mdi-camera"></i> ถ่ายจากกล้อง</button>
+                                    <h4 class="card-title" >รูปภาพสินค้า</h4>
+
+
+                                    <div id="image_input">
+                                        <input type="file" name="image" class="dropify" data-height="300" />
+                                    </div>
+                                    <div id="webcam_input" ng-bind-html="webcam_input">
+
+                                    </div>
+                                    <div id="results"></div>
+
+
+
 
                                 </div>
                             </div>
@@ -188,6 +203,11 @@
 <!-- ============================================================== -->
 @endsection
 
+@section('js-head')
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/webcam/webcam.min.js"></script>
+@endsection
+
 @section('js-bottom')
     <!--Wave Effects -->
     <!--script src="js/waves.js"></script-->
@@ -197,7 +217,6 @@
 <!-- jQuery file upload -->
     <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script>
-
 
         $(document).ready(function() {
             // Basic
@@ -246,7 +265,21 @@
                 }
             });
 
+
+
         });
+    </script>
+
+    <script>
+        function captureWebcam() {
+            // take snapshot and get image data
+            Webcam.snap( function(data_uri) {
+                // display results in page
+                document.getElementById('webcam_input').innerHTML =
+                    '<img src="'+data_uri+'"/>';
+            } );
+        }
+
     </script>
 
     <!-- ============================================================== -->
