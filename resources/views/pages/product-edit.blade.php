@@ -14,21 +14,20 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">
-                <form class="form" method="post" action="/product-new" id="addProductForm">
+                <form class="form" method="post" action="/product-edit/{{$product->id}}" id="editProductForm">
 
                 <div class="row">
                         {{csrf_field()}}
                         <div class="col-md-6">
                             <div class="card card-outline-inverse">
                                 <div class="card-header">
-                                    <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" data-toggle="modal" data-target="#checkProduct" data-whatever="@mdo" ><i class="mdi mdi-library-plus"></i> ตรวจสอบสินค้า</button>
                                     <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
                                 </div>
                                 <div class="card-body">
 
                                         <div class="switch">
                                             <label>เปิดใช้ SN / IMEI ?
-                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red" {{$product->type_sn == 1 ? "checked":""}}></span>
+                                                <input type="checkbox" name="type_sn" {{$product->type_sn == 1 ? "checked":""}}><span class="lever switch-col-red"></span>
                                             </label>
                                         </div>
 
@@ -61,12 +60,12 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group" ng-controller="ProductNewController">
+                                        <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()" value="{{$product->barcode}}">
+                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด"  value="{{$product->barcode}}" disabled>
                                                 <span class="input-group-btn">
-                                                    <span class="btn waves-effect waves-light btn-success" ng-click="getGenBarcode()">รันบาร์โค้ด</span>
+                                                    <span class="btn waves-effect waves-light btn-danger">แก้ไขบาร์โค้ด</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -105,7 +104,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="card" ng-controller="ProductNewController">
+                            <div class="card" ng-controller="ProductListController">
                                 <div class="card-body">
                                     <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" ng-click="startWebcam()" ><i class="mdi mdi-camera"></i> ถ่ายจากกล้อง</button>
                                     <h4 class="card-title" >รูปภาพสินค้า</h4>
@@ -127,7 +126,7 @@
                         </div>
                         <div class="col-md-12 p-b-20">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
-                            <button class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
+                            <a href="/product-list" class="btn btn-inverse waves-effect waves-light">ย้อนกลับ</a>
                         </div>
 
                 </div>
@@ -136,65 +135,6 @@
     </div>
     </div>
 
-    <div class="modal fade" id="checkProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">ตรวจสอบสินค้า</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                    <div class="modal-body"  ng-controller="ProductNewController">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                            <input type="text" class="form-control" name="barcode_check" id="input_barcode_check" placeholder="บาร์โค้ด" ng-model="barcode" ng-keyup="$event.keyCode == 13 && getProductInfo()">
-                            <span class="input-group-btn">
-                                <button ng-click="getProductInfo()"   class="btn waves-effect waves-light btn-success">ตรวจสอบ</button>
-                            </span>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <table class="table m-t-10">
-                                    <tbody>
-                                    <tr>
-                                        <td width="100px" bgcolor="#d3d3d3"><b>ชื่อสินค้า</b></td>
-                                        <td><% product.product_name %></td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#d3d3d3">หมวดหมู่</td>
-                                        <td><% product.cate_name %></td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#d3d3d3">ยี่ห้อ</td>
-                                        <td><% product.brand_name %></td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#d3d3d3">รุ่น</td>
-                                        <td><% product.model %></td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#d3d3d3">ราคา</td>
-                                        <td><% product.price %></td>
-                                    </tr>
-                                    <tr>
-                                        <td bgcolor="#d3d3d3">รายละเอียด</td>
-                                        <td><% product.description %></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-t-20 p-l-20">
-                                    <img src="../assets/images/users/1.jpg" width="80%">
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -259,7 +199,7 @@
             })
 
             /******************************/
-            document.getElementById('addProductForm').addEventListener('keypress', function(event) {
+            document.getElementById('editProductForm').addEventListener('keypress', function(event) {
                 if (event.keyCode == 13) {
                     event.preventDefault();
                 }

@@ -37,8 +37,8 @@
                             <td>{{$product->price}}</td>
                             <td>
                                 <button type="button" class="btn waves-effect waves-light btn-xs btn-primary" ng-click="viewImage({{$product->id}})">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
+                                <a  href="/product-edit/{{$product->id}}" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</a>
+                                <a href="/product/delete/{{$product->id}}" class="btn waves-effect waves-light btn-xs btn-danger" onclick="return confirm('ต้องการลบใช่หรือไม่?');">ลบ</a>
                             </td>
                         </tr>
                     @endforeach
@@ -85,9 +85,20 @@
     <!-- jQuery peity -->
     <script src="../assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
     <script src="../assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
+
+    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
+
+    @include('template.flash-msg');
 @endsection
 
 @section('css-head')
     <!-- Bootstrap responsive table CSS -->
     <link href="../assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
+
+    <!-- toast CSS -->
+    <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
 @endsection

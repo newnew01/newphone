@@ -24,6 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/product-list','ProductListController@index');
 Route::get('/product-edit/{id}','ProductEditController@index');
+Route::post('/product-edit/{id}','ProductEditController@save');
 
 Route::get('/product-new','ProductNewController@index');
 Route::post('/product-new','ProductNewController@store');
