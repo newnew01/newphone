@@ -23,6 +23,7 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/product-list','ProductListController@index');
+Route::get('/product-edit/{id}','ProductEditController@index');
 
 Route::get('/product-new','ProductNewController@index');
 Route::post('/product-new','ProductNewController@store');
@@ -53,6 +54,7 @@ Route::get('/sale-list', function () {
     return view('pages.sale-list');
 });
 
+Route::get('/service-product/find-by-id/{id}','ServiceProductController@findProductById');
 Route::get('/service-product/find-by-barcode/{barcode}','ServiceProductController@findProductByBarcode');
 Route::get('/service-product/gen-barcode','ServiceProductController@getGenBarcode');
 

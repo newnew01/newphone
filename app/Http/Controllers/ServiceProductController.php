@@ -22,6 +22,21 @@ class ServiceProductController extends Controller
             return 'null';
     }
 
+    public function findProductById($id)
+    {
+        $p = Product::find($id);
+        if($p != null){
+            $product = $p;
+            $product['brand_name'] = $product->brand->brand_name;
+            $product['cate_name'] = $product->category->cate_name;
+
+            return $product;
+        }
+
+        else
+            return 'null';
+    }
+
     public function getGenBarcode()
     {
         $barcode = '11112222000001';

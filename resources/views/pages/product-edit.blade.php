@@ -1,9 +1,9 @@
 @extends('app')
-@section('page-header','เพิ่มสินค้า')
+@section('page-header','แก้ไขสินค้า')
 @section('page-header-right')
     <li class="breadcrumb-item"><a href="javascript:void(0)">หน้าหลัก</a></li>
     <li class="breadcrumb-item">สินค้า</li>
-    <li class="breadcrumb-item active">เพิ่มสินค้า</li>
+    <li class="breadcrumb-item active">แก้ไขสินค้า</li>
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
 
                                         <div class="switch">
                                             <label>เปิดใช้ SN / IMEI ?
-                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span>
+                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red" {{$product->type_sn == 1 ? "checked":""}}></span>
                                             </label>
                                         </div>
 
@@ -38,7 +38,7 @@
                                                 <select class="form-control custom-select" name="category_id">
                                                     <option value="-1">[หมวดหมู่]</option>
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                                                        <option value="{{$category->id}}" {{$product->category_id == $category->id ? "selected":""}}>{{$category->cate_name}}</option>
                                                     @endforeach
                                                 </select>
 
@@ -53,7 +53,7 @@
                                                 <select class="form-control custom-select" name="brand_id">
                                                     <option value="-1">[ยี่ห้อ]</option>
                                                     @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                                        <option value="{{$brand->id}}" {{$product->brand_id == $brand->id ? "selected":""}}>{{$brand->brand_name}}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-btn">
@@ -64,7 +64,7 @@
                                         <div class="form-group" ng-controller="ProductNewController">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()">
+                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()" value="{{$product->barcode}}">
                                                 <span class="input-group-btn">
                                                     <span class="btn waves-effect waves-light btn-success" ng-click="getGenBarcode()">รันบาร์โค้ด</span>
                                                 </span>
@@ -74,27 +74,27 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-tag-text-outline"></i></div>
-                                                <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า">
+                                                <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า" value="{{$product->product_name}}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
-                                                <input type="text" class="form-control" name="model" placeholder="รุ่น">
+                                                <input type="text" class="form-control" name="model" placeholder="รุ่น" value="{{$product->model}}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
-                                                <input type="text" class="form-control" name="price" placeholder="ราคา">
+                                                <input type="text" class="form-control" name="price" placeholder="ราคา" value="{{$product->price}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
-                                                <input type="text" class="form-control" name="description" placeholder="รายละเอียด">
+                                                <input type="text" class="form-control" name="description" placeholder="รายละเอียด" value="{{$product->description}}">
                                             </div>
                                         </div>
 
@@ -204,7 +204,7 @@
 @endsection
 
 @section('js-head')
-    <script type="text/javascript" src="js/webcam/webcam.min.js"></script>
+    <script type="text/javascript" src="/js/webcam/webcam.min.js"></script>
     <script src="/js/angular/controller/product-new.js"></script>
 @endsection
 
@@ -299,8 +299,8 @@
     <!-- toast CSS -->
     <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
 
 @endsection

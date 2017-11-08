@@ -10,9 +10,9 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row">
+<div class="row" ng-app="newphoneApp">
     <div class="col-12">
-        <div class="card card-outline-inverse">
+        <div class="card card-outline-inverse" ng-controller="ProductListController">
             <div class="card-header">
                 <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right"><i class="mdi mdi-library-plus"></i> เพิ่มสินค้า</button>
                 <h4 class="m-b-0 text-white">รายการสินค้า</h4>
@@ -36,7 +36,7 @@
                             <td>{{$product->model}}</td>
                             <td>{{$product->price}}</td>
                             <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary" ng-click="viewImage({{$product->id}})">ภาพสินค้า</button>
                                 <button type="button" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
                                 <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
                             </td>
@@ -45,12 +45,40 @@
                     </tbody>
                 </table>
             </div>
+
+            <div id="viewImageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel"><% product_modal.product_name %></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            Image: <% product_modal.image %>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">ปิด</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
         </div>
     </div>
+
+
+
 </div>
+
+
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
+@endsection
+
+@section('js-head')
+    <script src="/js/angular/controller/product-list.js"></script>
 @endsection
 
 @section('js-bottom')
