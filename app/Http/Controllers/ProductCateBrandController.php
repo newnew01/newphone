@@ -46,29 +46,8 @@ class ProductCateBrandController extends Controller
         return redirect('/product-catebrand');
     }
 
-    public function deleteBrand($id)
-    {
-        $brand = Brand::find($id);
-        if($brand != null){
-            $brand->delete();
-            Session::flash('flash_msg_success',['title'=>'สำเร็จ','text'=>'ลบยี่ห้อแล้ว '.$brand->brand_name]);
-        }else{
-            Session::flash('flash_msg_danger',['title'=>'ผิดพลาด','text'=>'ไม่พบยี่ห้อในระบบ']);
-        }
-        return redirect('/product-catebrand');
-    }
 
-    public function deleteCategory($id)
-    {
-        $cate = Category::find($id);
-        if($cate != null){
-            $cate->delete();
-            Session::flash('flash_msg_success',['title'=>'สำเร็จ','text'=>'ลบหมวดหมู่แล้ว '.$cate->cate_name]);
-        }else{
-            Session::flash('flash_msg_danger',['title'=>'ผิดพลาด','text'=>'ไม่พบหมวดหมู่ในระบบ']);
-        }
 
-        return redirect('/product-catebrand');
-    }
+
 
 }

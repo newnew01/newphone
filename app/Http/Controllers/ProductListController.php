@@ -9,7 +9,6 @@ class ProductListController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('pages.product-list')->with(compact('products'));
+
     }
 }

@@ -22,7 +22,7 @@
                     <thead>
                     <tr>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการหมวดหมู่</th>
-                        <th width="100px"></th>
+                        <th width="120px"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,8 +30,8 @@
                         <tr>
                             <td class="title">{{$category->cate_name}}</td>
                             <td>
-                                <a href="/product-catebrand/delete-category/{{$category->id}}" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</a>
-                                <a href="/product-catebrand/delete-category/{{$category->id}}" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</a>
+                                <button class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
+                                <a href="/category/delete/{{$category->id}}" class="btn waves-effect waves-light btn-xs btn-danger" onclick="return confirm('ยืนยันการลบ?');">ลบ</a>
                             </td>
                         </tr>
                     @endforeach
@@ -53,7 +53,7 @@
                     <thead>
                     <tr>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการยี่ห้อ</th>
-                        <th width="100px"></th>
+                        <th width="120px"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,8 +61,8 @@
                         <tr>
                             <td class="title">{{$brand->brand_name}}</td>
                             <td>
-                                <a href="/product-catebrand/edit-brand/{{$brand->id}}" class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</a>
-                                <a href="/product-catebrand/delete-brand/{{$brand->id}}" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</a>
+                                <button class="btn waves-effect waves-light btn-xs btn-info">แก้ไข</button>
+                                <a href="/brand/delete/{{$brand->id}}" class="btn waves-effect waves-light btn-xs btn-danger" onclick="return confirm('ยืนยันการลบ?');">ลบ</a>
                             </td>
                         </tr>
                     @endforeach
@@ -81,13 +81,12 @@
                     <h4 class="modal-title" id="exampleModalLabel1">เพิ่มหมวดหมู่</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form class="form" method="post" action="{{url('product-catebrand')}}">
+                <form class="form" method="post" action="/category/new">
                     {{csrf_field()}}
                     <div class="modal-body">
 
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="กรุณากรอกหมวดหมู่" name="category_name">
-                                <input type="hidden" name="form_type" value="category_name">
                             </div>
 
                     </div>
@@ -107,13 +106,12 @@
                     <h4 class="modal-title" id="exampleModalLabel1">เพิ่มยี่ห้อ</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form class="form" method="post" action="{{url('product-catebrand')}}">
+                <form class="form" method="post" action="/brand/new">
                     {{csrf_field()}}
                     <div class="modal-body">
 
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อ" name="brand_name">
-                                <input type="hidden" name="form_type" value="brand_name">
                             </div>
 
                     </div>

@@ -1,7 +1,8 @@
 app.controller('ProductNewController', function($scope,$sce,$http) {
-    $scope.product = '';
+    $scope.product = {"image":"/assets/images/no-image.png"};
     $scope.barcode = '';
     $scope.barcode_ = '';
+
 
     $scope.getProductInfo = function () {
         $scope.product = '';
@@ -10,11 +11,16 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
                 if(response.data == 'null'){
                     alert("ไม่พบสินค้าในระบบ!!");
                 }else{
+
+                    if(response.data.image == null)
+                        response.data.image = '/assets/images/no-image.png';
+
                     $scope.product = response.data;
                 }
 
             });
         $scope.barcode = null;
+        document.getElementById('input_barcode_check').focus();
         //document.getElementById('input_barcode_check').reset();
     }
 

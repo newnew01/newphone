@@ -22,17 +22,20 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/product-list','ProductListController@index');
-Route::get('/product-edit/{id}','ProductEditController@index');
-Route::post('/product-edit/{id}','ProductEditController@save');
+Route::get('/product/list','ProductController@view_productList');
+Route::get('/product/edit/{id}','ProductController@view_editProduct');
+Route::post('/product/edit/{id}','ProductController@editProduct');
+Route::get('/product/delete/{id}','ProductController@delete');
 
-Route::get('/product-new','ProductNewController@index');
-Route::post('/product-new','ProductNewController@store');
+Route::get('/product/new','ProductController@view_newProduct');
+Route::post('/product/new','ProductController@newProduct');
 
 Route::get('/product-catebrand','ProductCateBrandController@index');
-Route::post('/product-catebrand','ProductCateBrandController@store');
-Route::get('/product-catebrand/delete-brand/{id}','ProductCateBrandController@deleteBrand');
-Route::get('/product-catebrand/delete-category/{id}','ProductCateBrandController@deleteCategory');
+
+Route::post('/brand/new','BrandController@newBrand');
+Route::post('/category/new','CategoryController@newCategory');
+Route::get('/brand/delete/{id}','BrandController@deleteBrand');
+Route::get('/category/delete/{id}','CategoryController@deleteCategory');
 
 Route::get('/stock-in', function () {
     return view('pages.stock-in');

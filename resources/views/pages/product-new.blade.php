@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">
-                <form class="form" method="post" action="/product-new" id="addProductForm">
+                <form class="form" method="post" action="/product/new" id="addProductForm" autocomplete="off">
 
                 <div class="row">
                         {{csrf_field()}}
@@ -127,7 +127,7 @@
                         </div>
                         <div class="col-md-12 p-b-20">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
-                            <button class="btn btn-inverse waves-effect waves-light">ยกเลิก</button>
+                            <a href="/product/list" class="btn btn-inverse waves-effect waves-light">ย้อนกลับ</a>
                         </div>
 
                 </div>
@@ -152,7 +152,7 @@
                             </span>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <table class="table m-t-10">
                                     <tbody>
                                     <tr>
@@ -182,9 +182,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-6">
-                                <div class="p-t-20 p-l-20">
-                                    <img src="../assets/images/users/1.jpg" width="80%">
+                            <div class="col-md-5">
+                                <div class="p-t-20">
+                                    <img ng-src="<% product.image %>" src="/assets/images/no-image.png" width="100%">
                                 </div>
                             </div>
 
@@ -204,7 +204,7 @@
 @endsection
 
 @section('js-head')
-    <script type="text/javascript" src="js/webcam/webcam.min.js"></script>
+    <script type="text/javascript" src="/js/webcam/webcam.min.js"></script>
     <script src="/js/angular/controller/product-new.js"></script>
 @endsection
 
@@ -299,8 +299,8 @@
     <!-- toast CSS -->
     <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
 
 @endsection
