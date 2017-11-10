@@ -7,6 +7,7 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -40,13 +41,32 @@ class ProductController extends Controller
 
     public function newProduct(Request $request)
     {
+
+
+        ////////////////////////////////////////////////////////////
         $product = $request->all();
         if($request->has('type_sn'))
             $product['type_sn'] = true;
         else
             $product['type_sn'] = false;
 
-        Product::create($product);
+        //dd($product);
+        //dd($product['img_input']);
+        //$jpg_url = "product-".time().".jpg";
+        //$path = public_path($jpg_url);
+        //Image::make(base64_decode($base64_str))->save($path);
+        $r = Product::create($product);
+
+        if($product['img_input'] != null){
+            $url = '/assets/images/products/';
+            $image_name = "product-".$r->id.".jpg";
+            $path = public_path($url.$image_name);
+            Image::make(base64_decode($product['img_input']))->save($path);
+            $r->image = $url.$image_name;
+            $r->save();
+        }
+
+
         Session::flash('flash_msg_success',['title' => 'สำเร็จ','text' => 'เพิ่มข้อมูลสำเร็จ']);
         return redirect('/product/list');
     }

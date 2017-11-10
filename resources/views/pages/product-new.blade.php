@@ -118,6 +118,7 @@
 
                                     </div>
                                     <div id="results"></div>
+                                    <input name="img_input" id="img_input" type="hidden">
 
 
 
@@ -277,6 +278,8 @@
                 // display results in page
                 document.getElementById('webcam_input').innerHTML =
                     '<img src="'+data_uri+'"/>';
+
+                $('#img_input').val(data_uri.replace('data:image/jpeg;base64,',''));
             } );
         }
 

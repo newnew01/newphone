@@ -11,6 +11,8 @@
 |
 */
 
+use Intervention\Image\Facades\Image;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -71,4 +73,12 @@ Route::get('/test-session',function (){
     $x['text'] = 'my text';
     \Session::flash('flash_test',$x);
     dd(session('flash_test'));
+});
+
+
+Route::get('/test_image', function()
+{
+    $img = Image::make('foo.jpg')->resize(300, 200);
+
+    return $img->response('jpg');
 });

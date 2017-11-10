@@ -78,6 +78,7 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
     $('#checkProduct').on('hidden.bs.modal', function (e) {
         $scope.product = '';
         $scope.barcode = '';
+        $scope.product = {"image":"/assets/images/no-image.png"};
         $scope.$apply();
     });
 
