@@ -6,20 +6,25 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
 
     $scope.getProductInfo = function () {
         $scope.product = '';
-        $http.get("/service-product/find-by-barcode/"+$scope.barcode)
-            .then(function(response) {
-                if(response.data == 'null'){
-                    alert("ไม่พบสินค้าในระบบ!!");
-                }else{
+        if($scope.barcode == ''){
+            alert('กรุณากรอกบาร์โค้ด')
+            document.getElementById('input_barcode_check').focus();
+        }else {
+            $http.get("/service-product/find-by-barcode/"+$scope.barcode)
+                .then(function(response) {
+                    if(response.data == 'null'){
+                        alert("ไม่พบสินค้าในระบบ!!");
+                    }else{
 
-                    if(response.data.image == null)
-                        response.data.image = '/assets/images/no-image.png';
+                        if(response.data.image == null)
+                            response.data.image = '/assets/images/no-image.png';
 
-                    $scope.product = response.data;
-                }
+                        $scope.product = response.data;
+                    }
 
-            });
-        $scope.barcode = null;
+                });
+        }
+        $scope.barcode = '';
         document.getElementById('input_barcode_check').focus();
         //document.getElementById('input_barcode_check').reset();
     }
