@@ -39,17 +39,9 @@ Route::post('/category/new','CategoryController@newCategory');
 Route::get('/brand/delete/{id}','BrandController@deleteBrand');
 Route::get('/category/delete/{id}','CategoryController@deleteCategory');
 
-Route::get('/stock-in', function () {
-    return view('pages.stock-in');
-});
-
-Route::get('/stock-transfer', function () {
-    return view('pages.stock-transfer');
-});
-
-Route::get('/stock-list', function () {
-    return view('pages.stock-list');
-});
+Route::get('/stock/in','StockController@view_stockIn');
+Route::get('/stock/transfer','StockController@view_stockTransfer');
+Route::get('/stock/list','StockController@view_stockList');
 
 
 Route::get('/sale-neworder', function () {

@@ -69,13 +69,13 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
 
 
 
-    $('#checkProduct').on('shown.bs.modal', function (e) {
+    $('#modal_sn').on('shown.bs.modal', function (e) {
         document.getElementById('input_barcode_check').focus();
         $scope.$apply();
 
     });
 
-    $('#checkProduct').on('hidden.bs.modal', function (e) {
+    $('#modal_sn').on('hidden.bs.modal', function (e) {
         $scope.product = '';
         $scope.barcode = '';
         $scope.product = {"image":"/assets/images/no-image.png"};

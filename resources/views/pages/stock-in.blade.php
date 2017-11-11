@@ -10,7 +10,7 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row">
+<div class="row" ng-app="newphoneApp" ng-controller="StockInController">
     <div class="col-md-12">
         <div class="card card-outline-inverse">
             <div class="card-header">
@@ -18,23 +18,23 @@
             </div>
             <div class="card-body">
                 <div class="row p-t-20">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="บาร์โค้ด" style="">
+                                <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()">
 
-                                <input type="email" class="form-control col-2" id="exampleInputEmail1" placeholder="จำนวน">
                                 <span class="input-group-btn">
-                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success">ตกลง</button>
+                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2    ">
-                        <span class="input-group-btn">
+                    <div class="col-md-4">
+
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning">จำนวนมาก</button>
                             <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
-                        </span>
+
                     </div>
 
 
@@ -61,54 +61,66 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td ><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Nigam</span></td>
-                            <td>Eichmann</td>
-                            <td>@Sonu</td>
-                            <td></td>
-                            <td></td>
+
+                        <tr ng-repeat="product in products">
+                            <td><% $index+1 %></td>
+                            <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
+                            <td><% product.brand %></td>
+                            <td><% product.model %></td>
+                            <td><% product.sn %></td>
+                            <td><% product.count %></td>
                             <td>
                                 <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Deshmukh</span></td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Roshan</span></td>
-                            <td>Rogahn</td>
-                            <td>@Hritik</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
-                            </td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
 
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
-                    <button type="submit" class="btn btn-inverse waves-effect waves-light" ><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
+                    <button class="btn btn-inverse waves-effect waves-light" ng-click="clearList()"><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal_sn" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">กรอก IMEI/SN</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                        <input type="text" class="form-control" name="imei_sn_input" id="imei_sn_input" placeholder="กรุณากรอก IMEI/SN" ng-model="imei_sn_input" ng-keyup="$event.keyCode == 13 && addProductToListSN()">
+                        <span class="input-group-btn">
+                                <button ng-click="addProductToListSN()"   class="btn waves-effect waves-light btn-success">ตกลง</button>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 
 </div>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
+@endsection
+
+@section('js-head')
+    <script src="/js/angular/controller/stock-in.js"></script>
+@endsection
+
+@section('js-bottom')
+    <script>
+        $(document).ready(function () {
+            $('#barcode_input').focus();
+        });
+    </script>
 @endsection

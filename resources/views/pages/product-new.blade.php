@@ -188,10 +188,7 @@
                                     <img ng-src="<% product.image %>" src="/assets/images/no-image.png" width="100%">
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
             </div>
         </div>
