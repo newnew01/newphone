@@ -7,7 +7,7 @@
 
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-package"></i><span class="hide-menu">สินค้า</span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="/product/new">เพิ่มสินค้า </a></li>
+                <li><a href="/product/new">เพิ่มสินค้า</a></li>
                 <li><a href="/product/list">รายการสินค้า</a></li>
                 <li><a href="/product-barcode">บาร์โค้ด</a></li>
                 <li><a href="/product-catebrand">หมวดหมู่และยี่ห้อ</a></li>

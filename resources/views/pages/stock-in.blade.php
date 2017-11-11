@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-4">
 
-                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning">จำนวนมาก</button>
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#modal_amount_barcode">จำนวนมาก</button>
                             <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
 
                     </div>
@@ -98,6 +98,30 @@
                         <input type="text" class="form-control" name="imei_sn_input" id="imei_sn_input" placeholder="กรุณากรอก IMEI/SN" ng-model="imei_sn_input" ng-keyup="$event.keyCode == 13 && addProductToListSN()">
                         <span class="input-group-btn">
                                 <button ng-click="addProductToListSN()"   class="btn waves-effect waves-light btn-success">ตกลง</button>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal_amount_barcode" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">รับเข้าจำนวนมาก</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="mdi mdi-numeric"></i></div>
+                        <input type="text" class="form-control col-md-2" name="amount" id="amount" ng-model="amount" placeholder="จำนวน" ng-keyup="$event.keyCode == 13 && checkAmount()">
+                        <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                        <input type="text" class="form-control" name="amount_barcode" id="amount_barcode" ng-model="amount_barcode" placeholder="บาร์โค้ด" ng-keyup="$event.keyCode == 13 && addProductToListAmount()">
+                        <span class="input-group-btn">
+                                <button ng-click="addProductToListAmount()"   class="btn waves-effect waves-light btn-success">ตกลง</button>
                             </span>
                     </div>
                 </div>
