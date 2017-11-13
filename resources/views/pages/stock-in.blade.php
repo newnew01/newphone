@@ -122,7 +122,7 @@
                         <input type="text" class="form-control" name="amount_barcode" id="amount_barcode" ng-model="amount_barcode" placeholder="บาร์โค้ด" ng-keyup="$event.keyCode == 13 && addProductToListAmount()">
                         <span class="input-group-btn">
                                 <button ng-click="addProductToListAmount()"   class="btn waves-effect waves-light btn-success">ตกลง</button>
-                            </span>
+                        </span>
                     </div>
                 </div>
             </div>
