@@ -29,6 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script src="/js/angular/app.js"></script>
+    <script src="/js/angular/controller/product-barcode-search.js"></script>
 
     @yield('js-head')
 </head>

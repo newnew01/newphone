@@ -1,33 +1,7 @@
 app.controller('ProductNewController', function($scope,$sce,$http) {
     $scope.product = {"image":"/assets/images/no-image.png"};
-    $scope.barcode = '';
     $scope.barcode_ = '';
 
-
-    $scope.getProductInfo = function () {
-        $scope.product = '';
-        if($scope.barcode == ''){
-            alert('กรุณากรอกบาร์โค้ด')
-            document.getElementById('input_barcode_check').focus();
-        }else {
-            $http.get("/service-product/find-by-barcode/"+$scope.barcode)
-                .then(function(response) {
-                    if(response.data == 'null'){
-                        alert("ไม่พบสินค้าในระบบ!!");
-                    }else{
-
-                        if(response.data.image == null)
-                            response.data.image = '/assets/images/no-image.png';
-
-                        $scope.product = response.data;
-                    }
-
-                });
-        }
-        $scope.barcode = '';
-        document.getElementById('input_barcode_check').focus();
-        //document.getElementById('input_barcode_check').reset();
-    }
 
     $scope.checkDuplicatedBarcode = function () {
         $http.get("/service-product/find-by-barcode/"+$scope.barcode_)
@@ -71,22 +45,6 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
 
 
     }
-
-
-
-    $('#checkProduct').on('shown.bs.modal', function (e) {
-        //alert();
-        document.getElementById('input_barcode_check').focus();
-        $scope.$apply();
-
-    });
-
-    $('#checkProduct').on('hidden.bs.modal', function (e) {
-        $scope.product = '';
-        $scope.barcode = '';
-        $scope.product = {"image":"/assets/images/no-image.png"};
-        $scope.$apply();
-    });
 
 
 
