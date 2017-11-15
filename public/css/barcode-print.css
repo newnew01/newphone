@@ -1,0 +1,26 @@
+@page {
+    size: 16.8cm 22.5cm;
+    margin: 0; /* change the margins as you want them to be. */
+    padding: 0;
+    position:absolute;
+}
+
+.barcode {
+    width:3cm;
+}
+.product_name {
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.price {
+    font-size:16px;
+    background: #b9b9b9;
+    color: white;
+    -webkit-print-color-adjust: exact;
+}
+
+.barcode-number {
+    font-size: 12px;
+    text-align: center;
+}

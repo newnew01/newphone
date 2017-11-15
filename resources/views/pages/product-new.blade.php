@@ -10,7 +10,7 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row" ng-app="newphoneApp">
+<div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body p-b-0">

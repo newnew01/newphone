@@ -10,7 +10,7 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row" ng-app="newphoneApp" ng-controller="StockInController">
+<div class="row" ng-controller="StockInController">
     <div class="col-md-12">
         <div class="card card-outline-inverse">
             <div class="card-header">

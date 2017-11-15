@@ -9,7 +9,6 @@
             <ul aria-expanded="false" class="collapse">
                 <li><a href="/product/new">เพิ่มสินค้า</a></li>
                 <li><a href="/product/list">รายการสินค้า</a></li>
-                <li><a href="/product-barcode">บาร์โค้ด</a></li>
                 <li><a href="/product-catebrand">หมวดหมู่และยี่ห้อ</a></li>
             </ul>
         </li>
@@ -26,6 +25,12 @@
                 <li><a href="/sale-list">รายการขาย</a></li>
                 <li><a href="/sale-topup">เติมเงิน</a></li>
                 <li><a href="/sale-service">บิลบริการ</a></li>
+            </ul>
+        </li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-barcode"></i><span class="hide-menu">บาร์โค้ด</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="/barcode/product">บาร์โค้ดสินค้า</a></li>
+                <li><a href="/barcode/custom">กำหนดเอง</a></li>
             </ul>
         </li>
 
