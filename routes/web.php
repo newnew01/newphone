@@ -44,9 +44,10 @@ Route::get('/stock/in','StockController@view_stockIn');
 Route::get('/stock/transfer','StockController@view_stockTransfer');
 Route::get('/stock/list','StockController@view_stockList');
 
-Route::get('/barcode/custom',function (){
-    return view('pages.barcode-custom');
-});
+
+
+Route::get('/barcode/custom','BarcodeController@viewCustom');
+Route::post('/barcode/print','BarcodeController@viewPrint');
 
 
 Route::get('/sale-neworder', function () {

@@ -3,43 +3,23 @@
     <link href="/css/barcode-print.css" id="theme" rel="stylesheet">
 </head>
 <body>
-<div style="left:2.8cm;top:0.2cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
-<div style="left:6.8cm;top:0.2cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
-<div style="left:11cm;top:0.2cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
-<div style="left:15.1cm;top:0.2cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
+
+@for($i=0;$i<14;$i++)
+    @for($j=0;$j<4;$j++)
+        @if($barcode_data['barcode'][($i*4)+($j)] != '')
+        <div style="left:{{$pos_x[$j]}}cm;top:{{$pos_y[$i]}}cm;position:absolute" align="right">
+            <div class="product_name">{{$barcode_data['product_name'][($i*4)+($j)]}} | <span class="price">{{$barcode_data['price'][($i*4)+($j)]}}.-</span></div>
+            <img src="data:image/png;base64,{{$barcode_img[($i*4)+($j)]}}" alt="barcode" class="barcode">
+            <div class="barcode-number">{{$barcode_data['barcode'][($i*4)+($j)]}}</div>
+        </div>
+        @endif
+    @endfor
+
+@endfor
 
 
-<div style="left:2.8cm;top:1.8cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
-<div style="left:2.8cm;top:3.4cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
-<div style="left:2.8cm;top:5.1cm;position:absolute">
-    <div class="product_name">สายชาจ USB | <span class="price">150.-</span></div>
-    <img src="data:image/png;base64,{{$barcode}}" alt="barcode" class="barcode">
-    <div class="barcode-number">{{$barcode_number}}</div>
-</div>
+
+
 
 </body>
 </html>
