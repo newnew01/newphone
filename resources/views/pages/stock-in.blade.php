@@ -59,6 +59,7 @@
                                 <th>รุ่น</th>
                                 <th>SN/IMEI</th>
                                 <th>จำนวน</th>
+                                <th>AIS hot deal</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -71,6 +72,10 @@
                                 <td><% product.model %></td>
                                 <td><% product.sn %></td>
                                 <td><% product.count %></td>
+                                <td>
+                                    <input ng-if="product.type_sn == 1" type="checkbox" id="ais_deal_<% $index %>" class="filled-in chk-col-red" name="ais_deal_<% $index %>" />
+                                    <label ng-if="product.type_sn == 1" for="ais_deal_<% $index %>"></label>
+                                </td>
                                 <td>
                                     <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
                                     <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
