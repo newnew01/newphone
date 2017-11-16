@@ -20,4 +20,9 @@ class StockController extends Controller
     {
         return view('pages.stock-list');
     }
+
+    public function stockIn(Request $request)
+    {
+        dd($request->all());
+    }
 }

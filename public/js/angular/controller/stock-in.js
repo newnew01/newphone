@@ -29,7 +29,7 @@ app.controller('StockInController', function($scope,$sce,$http) {
                            }
                        }
                        if(!isInList)
-                           $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'sn':'','count':1});
+                           $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'type_sn':result.type_sn,'sn':'','count':1});
 
                    }
                    $scope.barcode_input = '';
@@ -74,7 +74,7 @@ app.controller('StockInController', function($scope,$sce,$http) {
            }
 
            if(!isInList){
-               $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'sn':$scope.product_tmp.sn,'count':1});
+               $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1});
                $scope.imei_sn_input = '';
                $('#modal_sn').modal('hide');
                //$scope.$apply();
