@@ -25,7 +25,7 @@ class BarcodeController extends Controller
                 $barcode_img[$i] =  DNS1D::getBarcodePNG($barcode_data['barcode'][$i], "C128");
         }
 
-        $test_img =  DNS1D::getBarcodePNG('11112222000000', "C128");
+        //$test_img =  DNS1D::getBarcodePNG('11112222000000', "C128");
         //position in cm
         $pos_x = [2.8,6.8,11,15.1];
         $pos_y = [0.2,1.8,3.4,5.0,
@@ -37,7 +37,6 @@ class BarcodeController extends Controller
             ->with(compact('barcode_data'))
             ->with(compact('barcode_img'))
             ->with(compact('pos_x'))
-            ->with(compact('pos_y'))
-            ->with(compact('test_img'));
+            ->with(compact('pos_y'));
     }
 }

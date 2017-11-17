@@ -24,6 +24,7 @@
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ชื่อสินค้า</th>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">ยี่ห้อ</th>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">รุ่น</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">คงเหลือ</th>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">ราคา</th>
                         <th></th>
                     </tr>
@@ -34,6 +35,7 @@
                             <td class="title"><a class="link" href="javascript:void(0)">{{$product->product_name}}</a></td>
                             <td>{{$product->brand->brand_name}}</td>
                             <td>{{$product->model}}</td>
+                            <td>{{$product->amount}}</td>
                             <td>{{$product->price}}</td>
                             <td>
                                 <button type="button" class="btn waves-effect waves-light btn-xs btn-primary" ng-click="viewImage({{$product->id}})">ภาพสินค้า</button>

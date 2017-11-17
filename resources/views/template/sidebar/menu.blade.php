@@ -16,7 +16,7 @@
             <ul aria-expanded="false" class="collapse">
                 <li><a href="/stock/in">รับสินค้าเข้า </a></li>
                 <li><a href="/stock/transfer">โอนสินค้า</a></li>
-                <li><a href="/stock/list">รายการสต๊อค</a></li>
+                <li><a href="/stock/list">รายการทำสต๊อค</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">การขาย</span></a>

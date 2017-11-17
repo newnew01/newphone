@@ -22,89 +22,31 @@
                 <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
                     <thead>
                     <tr>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ชื่อสินค้า</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">ยี่ห้อ</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">รุ่น</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">ราคา</th>
-                        <th>คงเหลือ</th>
+                        <th>เลขที่อ้างอิง</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการ</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">จากสาขา</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">ไปยังสาขา</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">สถานะ</th>
+                        <th>วันที่</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Avatar</a></td>
-                        <td>1</td>
-                        <td>2009</td>
-                        <td>83%</td>
-                        <td>2</td>
-                        <td>
-                            <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                            <button type="button" class="btn waves-effect waves-light btn-xs btn-info">ดู SN/IMEI</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Titanic</a></td>
-                        <td>2</td>
-                        <td>1997</td>
-                        <td>88%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">The Avengers</a></td>
-                        <td>3</td>
-                        <td>2012</td>
-                        <td>92%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Harry Potter and the Deathly Hallows—Part 2</a></td>
-                        <td>4</td>
-                        <td>2011</td>
-                        <td>96%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Frozen</a></td>
-                        <td>5</td>
-                        <td>2013</td>
-                        <td>89%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Iron Man 3</a></td>
-                        <td>6</td>
-                        <td>2013</td>
-                        <td>78%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Transformers: Dark of the Moon</a></td>
-                        <td>7</td>
-                        <td>2011</td>
-                        <td>36%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">The Lord of the Rings: The Return of the King</a></td>
-                        <td>8</td>
-                        <td>2003</td>
-                        <td>95%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Skyfall</a></td>
-                        <td>9</td>
-                        <td>2012</td>
-                        <td>92%</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td class="title"><a class="link" href="javascript:void(0)">Transformers: Age of Extinction</a></td>
-                        <td>10</td>
-                        <td>2014</td>
-                        <td>18%</td>
-                        <td>2</td>
-                    </tr>
+                    @foreach($stock_reference as $s)
+                        <tr>
+                            <td class="title">{{sprintf('%06d', $s->id)}}</td>
+                            <td>{{$s->ref_type}}</td>
+                            <td>{{$s->source_branch}}</td>
+                            <td>{{$s->destination_branch}}</td>
+                            <td>{{$s->status}}</td>
+                            <td>{{Carbon\Carbon::parse($s->created_at)->format('d-m-Y')}}</td>
+                            <td>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-info">ดู SN/IMEI</button>
+                            </td>
+                        </tr>
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -118,11 +60,11 @@
 
 @section('js-bottom')
     <!-- jQuery peity -->
-    <script src="../assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
-    <script src="../assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
+    <script src="/assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
+    <script src="/assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
 @endsection
 
 @section('css-head')
     <!-- Bootstrap responsive table CSS -->
-    <link href="../assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
+    <link href="/assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
 @endsection

@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductSN;
 use App\StockHistory;
-use App\StockInReference;
+use App\StockReference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Milon\Barcode\DNS1D;
 
 class StockController extends Controller
 {
@@ -23,7 +24,20 @@ class StockController extends Controller
 
     public function view_stockList()
     {
-        return view('pages.stock-list');
+        $stock_reference = StockReference::all();
+        return view('pages.stock-list')->with(compact('stock_reference'));
+    }
+
+    public function view_stockReference($reference_id)
+    {
+        //dd($reference_id);
+        $stock_reference = StockReference::find($reference_id);
+        $ref_id_barcode = DNS1D::getBarcodePNG(sprintf('%06d', $reference_id), "C128");
+
+        if($stock_reference->ref_type == 1)
+            return view('pages.stock-in-document')
+                ->with(compact('stock_reference'))
+                ->with(compact('ref_id_barcode'));
     }
 
     public function stockIn(Request $request)
@@ -80,10 +94,10 @@ class StockController extends Controller
                     ];
                 }
 
-                $stockin_reference = $this->createStockInHistory($products);
+                $stock_reference = $this->createStockInHistory($products);
 
-
-                return view('pages.stock-in-document')->with(compact('stockin_reference'));
+                return $this->view_stockReference($stock_reference->id);
+                //return view('pages.stock-in-document')->with(compact('stock_reference'));
             }else{
                 //error duplicated SN
                 Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'มี SN/IMEI ซ้ำในระบบ '.$duplicatedSN]);
@@ -99,16 +113,19 @@ class StockController extends Controller
 
     public function createStockInHistory($products)
     {
-        $stockin_reference = new StockInReference();
-        $stockin_reference->employee_id = 1;
-        $stockin_reference->branch = 1;
-        $stockin_reference->save();
+        $stock_ref = new StockReference();
+        $stock_ref->employee_id = 1;
+        $stock_ref->source_branch = 1;
+        $stock_ref->destination_branch = 1;
+        $stock_ref->ref_type = 1;
+        $stock_ref->document_ref = null;
+        $stock_ref->save();
 
         foreach ($products as $product){
             $stock_in = new StockHistory();
             $stock_in->product_id = $product['id'];
             $stock_in->ais_deal = $product['ais_deal'];
-            $stock_in->reference_id = $stockin_reference->id;
+            $stock_in->reference_id = $stock_ref->id;
             $stock_in->status = 2;
 
             if($product['type_sn'] == 1){
@@ -121,6 +138,6 @@ class StockController extends Controller
             $stock_in->save();
         }
 
-        return $stockin_reference;
+        return $stock_ref;
     }
 }
