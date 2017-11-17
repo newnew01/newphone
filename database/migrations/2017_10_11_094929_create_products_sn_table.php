@@ -18,7 +18,7 @@ class CreateProductsSnTable extends Migration
             $table->timestamps();
             $table->integer('product_id');
             $table->string('sn');
-            $table->boolean('ais_deal');
+            $table->boolean('ais_deal')->default(false);
             //$table->string('invoice_id');
             //$table->integer('status');
         });

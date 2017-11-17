@@ -154,10 +154,10 @@
     <!--Wave Effects -->
     <!--script src="js/waves.js"></script-->
 <!--stickey kit -->
-    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jQuery file upload -->
-    <script src="../assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <script src="/assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script>
 
         $(document).ready(function() {
@@ -229,9 +229,9 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
-    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
+    <script src="/assets/plugins/toast-master/js/jquery.toast.js"></script>
 
     @include('template.flash-msg');
 
@@ -239,9 +239,9 @@
 
 @section('css-head')
     <link rel="stylesheet" href="../assets/plugins/dropify/dist/css/dropify.min.css">
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
