@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductSN extends Model
+class StockHistory extends Model
 {
-    protected $table = 'products_sn';
-    //
+    protected $table = 'stock_history';
 
     public function productInfo()
     {

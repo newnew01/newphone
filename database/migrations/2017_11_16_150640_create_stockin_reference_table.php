@@ -16,10 +16,9 @@ class CreateStockinReferenceTable extends Migration
         Schema::create('stockin_reference', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('source_branch');
-            $table->integer('destination_branch');
+            $table->integer('branch');
             $table->integer('employee_id');
-            $table->integer('status');
+            //$table->integer('status');
         });
     }
 

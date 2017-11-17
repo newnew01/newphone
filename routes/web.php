@@ -94,3 +94,9 @@ Route::get('/test_barcode', function()
 
     return view('template.barcode-print')->with(compact('barcode'))->with(compact('barcode_number'));
 });
+
+Route::get('/test_invoice', function()
+{
+
+    return view('pages.stock-in-document');
+});

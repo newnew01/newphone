@@ -16,6 +16,10 @@ class CreateStocktransferReferenceTable extends Migration
         Schema::create('stocktransfer_reference', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('source_branch');
+            $table->integer('destination_branch');
+            $table->integer('employee_id');
+            $table->integer('status');
         });
     }
 
