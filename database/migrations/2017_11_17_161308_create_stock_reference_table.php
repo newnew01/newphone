@@ -21,7 +21,7 @@ class CreateStockReferenceTable extends Migration
             $table->integer('employee_id');
             $table->integer('ref_type');
             $table->string('document_ref')->default(null)->nullable();
-            $table->integer('status')->default(1);
+            $table->integer('status_id')->default(1);
         });
     }
 

@@ -119,6 +119,7 @@ class StockController extends Controller
         $stock_ref->destination_branch = 1;
         $stock_ref->ref_type = 1;
         $stock_ref->document_ref = null;
+        $stock_ref->status_id = 1;
         $stock_ref->save();
 
         foreach ($products as $product){
