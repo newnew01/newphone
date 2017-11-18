@@ -20,12 +20,11 @@
             </div>
             <div class="card-body">
                 <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
-                    <thead>
+                    <thead >
                     <tr>
                         <th>เลขที่อ้างอิง</th>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">รายการ</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">จากสาขา</th>
-                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">ไปยังสาขา</th>
+                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">สาขา</th>
                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">สถานะ</th>
                         <th>วันที่</th>
 
@@ -36,9 +35,24 @@
                     @foreach($stock_reference as $s)
                         <tr>
                             <td class="title">{{sprintf('%06d', $s->id)}}</td>
-                            <td>{{$s->type->type_name}}</td>
-                            <td>{{$s->sourceBranch->branch_name}}</td>
-                            <td>{{$s->destinationBranch->branch_name}}</td>
+                            <td>
+
+                                @if($s->ref_type == 1)
+                                <i class="mdi mdi-subdirectory-arrow-right text-primary"></i>
+                                @endif
+                                @if($s->ref_type == 2)
+                                    <i class="mdi mdi-swap-horizontal text-success"></i>
+                                @endif
+                                @if($s->ref_type == 3)
+                                    <i class="mdi mdi-currency-usd text-warning"></i>
+                                @endif
+                                {{$s->type->type_name}}</td>
+                            <td>
+                                @if($s->ref_type == 2)
+                                    {{$s->sourceBranch->branch_name}} ->
+                                @endif
+                                {{$s->destinationBranch->branch_name}}
+                            </td>
                             <td>{{$s->status->status_name}}</td>
                             <td>{{Carbon\Carbon::parse($s->created_at)->format('d-m-Y')}}</td>
                             <td>

@@ -18,7 +18,6 @@ class BranchesTableSeeder extends Seeder
             'เอสเคบ้านแซม',
             'เอสเคบ้านโฮ่ง'
         ];
-
         foreach ($branches as $branch){
             DB::table('branches')->insert([
                 'branch_name' => $branch
