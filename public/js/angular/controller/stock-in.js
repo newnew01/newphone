@@ -62,28 +62,40 @@ app.controller('StockInController', function($scope,$sce,$http) {
            alert('กรุณากรอก IMEI/SN');
            document.getElementById('imei_sn_input').focus();
        } else {
-           $scope.product_tmp.sn = $scope.imei_sn_input;
-           isInList =false;
+           $http.get("/service-product/check-duplicated-sn/"+$scope.product_tmp.id+','+$scope.imei_sn_input).then(function (response) {
+               if(response.data == 'false'){
+                   $scope.product_tmp.sn = $scope.imei_sn_input;
+                   isInList =false;
 
-           for (i = 0; i < $scope.products.length; i++) {
-               //alert(result.id+' '+$scope.products[i].id);
-               if($scope.product_tmp.id == $scope.products[i].id && $scope.product_tmp.sn == $scope.products[i].sn){
-                   isInList = true;
-                   break;
+                   for (i = 0; i < $scope.products.length; i++) {
+                       //alert(result.id+' '+$scope.products[i].id);
+                       if($scope.product_tmp.id == $scope.products[i].id && $scope.product_tmp.sn == $scope.products[i].sn){
+                           isInList = true;
+                           break;
+                       }
+                   }
+
+                   if(!isInList){
+                       $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1});
+                       $scope.imei_sn_input = '';
+                       $('#modal_sn').modal('hide');
+                       //$scope.$apply();
+                   } else {
+                       alert('มี IMEI/SN นี้อยู่ในรายการแล้ว');
+                       $scope.imei_sn_input = '';
+                       document.getElementById('imei_sn_input').focus();
+
+                   }
                }
-           }
+               else{
+                   alert('มี IMEI/SN ซ้ำในระบบ');
+                   $scope.imei_sn_input = '';
+                   document.getElementById('imei_sn_input').focus();
+               }
+           });
 
-           if(!isInList){
-               $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1});
-               $scope.imei_sn_input = '';
-               $('#modal_sn').modal('hide');
-               //$scope.$apply();
-           } else {
-               alert('มี IMEI/SN นี้อยู่ในรายการแล้ว');
-               $scope.imei_sn_input = '';
-               document.getElementById('imei_sn_input').focus();
 
-           }
+
 
            //alert($scope.imei_sn_input);
 
@@ -145,6 +157,19 @@ app.controller('StockInController', function($scope,$sce,$http) {
        }else {
            document.getElementById('amount_barcode').focus();
        }
+   }
+
+   $scope.checkDuplicatedSN = function (p_id,p_sn) {
+       duplicated = true;
+       $http.get("/service-product/check-duplicated-sn/"+p_id+','+p_sn).then(function (response) {
+           if(response.data == 'true')
+               duplicated = true;
+           alert(response.data);
+       });
+
+       alert(duplicated);
+
+       return duplicated;
    }
 
     $('#modal_sn').on('shown.bs.modal', function (e) {

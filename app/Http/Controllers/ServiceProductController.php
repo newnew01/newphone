@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductSN;
 use Illuminate\Http\Request;
 
 class ServiceProductController extends Controller
@@ -35,6 +36,19 @@ class ServiceProductController extends Controller
 
         else
             return 'null';
+    }
+
+    public function checkDuplicatedSN($id,$sn)
+    {
+        //dd($id.' '.$sn);
+        $p = ProductSN::where('product_id','=',$id)->where('sn','=',$sn);
+        if($p->exists()){
+
+            return 'true';
+        }
+
+        else
+            return 'false';
     }
 
     public function getGenBarcode()
