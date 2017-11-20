@@ -201,10 +201,10 @@
 
 
 @section('css-head')
-    <link rel="stylesheet" href="../assets/plugins/dropify/dist/css/dropify.min.css">
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/plugins/dropify/dist/css/dropify.min.css">
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->

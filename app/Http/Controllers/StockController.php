@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\Product;
 use App\ProductSN;
 use App\StockHistory;
@@ -19,7 +20,8 @@ class StockController extends Controller
 
     public function view_stockTransfer()
     {
-        return view('pages.stock-transfer');
+        $branches = Branch::all();
+        return view('pages.stock-transfer')->with(compact('branches'));
     }
 
     public function view_stockList()
