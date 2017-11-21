@@ -78,6 +78,7 @@ class StockController extends Controller
                         $product_sn->product_id = $p['product_id'][$i];
                         $product_sn->sn = $p['sn'][$i];
                         $product_sn->ais_deal = $ais_deal;
+                        $product_sn->branch_id = 1;
                         $product_sn->save();
 
                         $product->amount += 1;

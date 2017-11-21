@@ -43,104 +43,106 @@
             </div>
         </div>
     </div>
-
     <div class="col-md-12">
-        <div class="card card-outline-inverse">
-            <div class="card-body">
-                <div class="row">
-                    <table class="table color-table danger-table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>ชื่อสินค้า</th>
-                            <th>ยี่ห้อ</th>
-                            <th>รุ่น</th>
-                            <th>SN/IMEI</th>
-                            <th>จำนวน</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td ><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Nigam</span></td>
-                            <td>Eichmann</td>
-                            <td>@Sonu</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Deshmukh</span></td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><span data-toggle="tooltip" title="โทรศัพท์มือถือยี่ห้อ VIVO รุ่น Y53 สีทอง">Roshan</span></td>
-                            <td>Rogahn</td>
-                            <td>@Hritik</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">ภาพสินค้า</button>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger">ลบ</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-            </div>
-        </div>
+
     </div>
 
-    <div class="col-md-12">
-        <div class="card card-outline-inverse">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">รายละเอียดการโอน</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ต้นทาง</div>
-                                <input type="text" placeholder="" class="form-control" value="นิวโฟนแม่ทา" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                         <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ปลายทาง</div>
-                                <select class="form-control custom-select" name="branch_id">
-                                    <option value="-1">[สาขา]</option>
-                                    @foreach($branches as $branch)
-                                        <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+    <form method="post" action="/stock/transfer" style="width: 100%">
+        {{ csrf_field() }}
 
+
+        <div class="col-md-12">
+
+                <div class="card card-outline-inverse">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table color-table info-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>ยี่ห้อ</th>
+                                    <th>รุ่น</th>
+                                    <th>SN/IMEI</th>
+                                    <th>จำนวน</th>
+                                    <th>AIS deal</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr ng-if="products.length == 0">
+                                    <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
+                                </tr>
+
+                                <tr ng-repeat="product in products">
+                                    <td><% $index+1 %></td>
+                                    <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
+                                    <td><% product.brand %></td>
+                                    <td><% product.model %></td>
+                                    <td><% product.sn %></td>
+                                    <td><% product.count %></td>
+                                    <td><i class="mdi mdi-check text-danger" ng-if="product.ais_deal == 1"></i> </td>
+                                    <td>
+                                        <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">รายละเอียดสินค้า</button>
+                                        <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="display: none" ng-repeat="product in products">
+                            <input type="hidden" name="product_id[]" value="<% product.id %>">
+                            <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
+                            <input type="hidden" name="sn[]" value="<% product.sn %>">
+                            <input type="hidden" name="count[]" value="<% product.count %>">
+                        </div>
+                    </div>
                 </div>
+        </div>
 
-                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
-                <button type="submit" class="btn btn-inverse waves-effect waves-light" ><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">รายละเอียดการโอน</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ต้นทาง</div>
+                                    <input type="text" placeholder="" class="form-control" value="นิวโฟนแม่ทา" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ปลายทาง</div>
+                                    <select class="form-control custom-select" name="branch_id">
+                                        <option value="-1">[สาขา]</option>
+                                        @foreach($branches as $branch)
+                                            <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
+                    <button type="submit" class="btn btn-inverse waves-effect waves-light" ><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
+                </div>
             </div>
         </div>
-    </div>
+
+
+    </form>
 
     <div class="modal fade" tabindex="-1" id="modal_amount_barcode" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
@@ -188,6 +190,10 @@
         <!-- /.modal-dialog -->
     </div>
 
+
+
+
+
 </div>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
@@ -196,4 +202,15 @@
 
 @section('js-head')
     <script src="/js/angular/controller/stock-transfer.js"></script>
+@endsection
+
+@section('js-bottom')
+    <script>
+        source_branch = 1;
+
+        $(document).ready(function () {
+            $('#barcode_input').focus();
+        });
+
+    </script>
 @endsection

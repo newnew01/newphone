@@ -19,6 +19,7 @@ class CreateProductsSnTable extends Migration
             $table->integer('product_id');
             $table->string('sn');
             $table->boolean('ais_deal')->default(false);
+            $table->integer('branch_id');
             //$table->string('invoice_id');
             //$table->integer('status');
         });

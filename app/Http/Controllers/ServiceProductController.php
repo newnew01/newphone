@@ -38,6 +38,19 @@ class ServiceProductController extends Controller
             return 'null';
     }
 
+    public function findProductSNbyIdSN($id,$sn)
+    {
+        //dd($id.' '.$sn);
+        $p = ProductSN::where('product_id','=',$id)->where('sn','=',$sn);
+        if($p->exists()){
+
+            return $p->first();
+        }
+
+        else
+            return 'null';
+    }
+
     public function checkDuplicatedSN($id,$sn)
     {
         //dd($id.' '.$sn);

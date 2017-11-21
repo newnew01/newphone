@@ -5,6 +5,8 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
    $scope.imei_sn_input = '';
    $scope.amount_barcode = '';
    $scope.amount = '';
+   $scope.source_branch = source_branch;
+
 
    $scope.addProductToList = function () {
        if($scope.barcode_input == '') {
@@ -62,9 +64,10 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
            alert('กรุณากรอก IMEI/SN');
            document.getElementById('imei_sn_input').focus();
        } else {
-           $http.get("/service-product/check-duplicated-sn/"+$scope.product_tmp.id+','+$scope.imei_sn_input).then(function (response) {
-               if(response.data == 'false'){
+           $http.get("/service-product/find-productsn-by-id-sn/"+$scope.product_tmp.id+','+$scope.imei_sn_input).then(function (response) {
+               if(response.data != 'null' && response.data.branch_id == $scope.source_branch){
                    $scope.product_tmp.sn = $scope.imei_sn_input;
+                   $scope.product_tmp.ais_deal = response.data.ais_deal;
                    isInList =false;
 
                    for (i = 0; i < $scope.products.length; i++) {
@@ -76,7 +79,7 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
                    }
 
                    if(!isInList){
-                       $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1});
+                       $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1,'ais_deal':$scope.product_tmp.ais_deal});
                        $scope.imei_sn_input = '';
                        $('#modal_sn').modal('hide');
                        //$scope.$apply();
@@ -88,7 +91,7 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
                    }
                }
                else{
-                   alert('มี IMEI/SN ซ้ำในระบบ');
+                   alert('ไม่มี SN/IMEI ในระบบ หรือในสาขาของคุณ');
                    $scope.imei_sn_input = '';
                    document.getElementById('imei_sn_input').focus();
                }
@@ -159,18 +162,11 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
        }
    }
 
-   $scope.checkDuplicatedSN = function (p_id,p_sn) {
-       duplicated = true;
-       $http.get("/service-product/check-duplicated-sn/"+p_id+','+p_sn).then(function (response) {
-           if(response.data == 'true')
-               duplicated = true;
-           alert(response.data);
-       });
-
-       alert(duplicated);
-
-       return duplicated;
+   $scope.setSourceBranch = function (branch_id) {
+       //$scope.source_branch = branch_id;
+       alert(branch_id);
    }
+
 
     $('#modal_sn').on('shown.bs.modal', function (e) {
         document.getElementById('imei_sn_input').focus();

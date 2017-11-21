@@ -159,18 +159,6 @@ app.controller('StockInController', function($scope,$sce,$http) {
        }
    }
 
-   $scope.checkDuplicatedSN = function (p_id,p_sn) {
-       duplicated = true;
-       $http.get("/service-product/check-duplicated-sn/"+p_id+','+p_sn).then(function (response) {
-           if(response.data == 'true')
-               duplicated = true;
-           alert(response.data);
-       });
-
-       alert(duplicated);
-
-       return duplicated;
-   }
 
     $('#modal_sn').on('shown.bs.modal', function (e) {
         document.getElementById('imei_sn_input').focus();

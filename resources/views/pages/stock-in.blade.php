@@ -65,6 +65,10 @@
                             </thead>
                             <tbody>
 
+                            <tr ng-if="products.length == 0">
+                                <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
+                            </tr>
+
                             <tr ng-repeat="product in products">
                                 <td><% $index+1 %></td>
                                 <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
