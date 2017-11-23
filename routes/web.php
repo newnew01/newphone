@@ -105,3 +105,6 @@ Route::get('/test_invoice', function()
 
     return view('pages.stock-in-document');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
