@@ -34,9 +34,20 @@
             </ul>
         </li>
 
-        <li> <a class="waves-effect waves-dark" href="/logout" aria-expanded="false"><i class="mdi mdi-logout"></i><span class="hide-menu">ออกจากระบบ</span></a>
+        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">ผู้ใช้งาน</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="/user">ผู้ใช้งาน</a></li>
+                <li><a href="/role">กำหนดสิทธิ์</a></li>
+            </ul>
+        </li>
+
+        <li> <a class="waves-effect waves-dark" href="/logout" aria-expanded="false" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-logout"></i><span class="hide-menu">ออกจากระบบ</span></a>
         </li>
 
     </ul>
 </nav>
 <!-- End Sidebar navigation -->
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>

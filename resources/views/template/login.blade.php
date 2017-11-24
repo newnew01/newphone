@@ -45,14 +45,14 @@
                             <img src="/assets/images/logo_sm_text_right.png" width="70%">
                         </div>
                     </div>
-                    <form class="form-horizontal form-material" id="loginform" action="index.html">
+                    <form class="form-horizontal form-material" method="post" id="loginform" action="/login">
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="รหัสพนักงาน"> </div>
+                                <input id="username" type="text" class="form-control" name="username" placeholder="รหัสพนักงาน" value="{{ old('username') }}" required autofocus> </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="รหัสผ่าน"> </div>
+                                <input id="password" type="password" placeholder="รหัสผ่าน" class="form-control" name="password" required> </div>
                         </div>
 
                         <div class="form-group text-center m-t-20">

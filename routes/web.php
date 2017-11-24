@@ -19,54 +19,59 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard');
+    });
+    Route::get('/login',function (){
+        return view('template.login');
+    });
+
+    Route::get('/product/list','ProductController@view_productList');
+    Route::get('/product/edit/{id}','ProductController@view_editProduct');
+    Route::post('/product/edit/{id}','ProductController@editProduct');
+    Route::get('/product/delete/{id}','ProductController@delete');
+
+    Route::get('/product/new','ProductController@view_newProduct');
+    Route::post('/product/new','ProductController@newProduct');
+
+    Route::get('/product-catebrand','ProductCateBrandController@index');
+
+    Route::post('/brand/new','BrandController@newBrand');
+    Route::post('/category/new','CategoryController@newCategory');
+    Route::get('/brand/delete/{id}','BrandController@deleteBrand');
+    Route::get('/category/delete/{id}','CategoryController@deleteCategory');
+
+    Route::get('/stock/in','StockController@view_stockIn');
+    Route::post('/stock/in','StockController@stockIn');
+    Route::get('/stock/transfer','StockController@view_stockTransfer');
+    Route::get('/stock/list','StockController@view_stockList');
+    Route::get('/stock/list/{reference_id}','StockController@view_stockReference');
+
+
+
+    Route::get('/barcode/custom','BarcodeController@viewCustom');
+    Route::post('/barcode/print','BarcodeController@viewPrint');
+
+
+    Route::get('/sale-neworder', function () {
+        return view('pages.sale-neworder');
+    });
+
+    Route::get('/sale-list', function () {
+        return view('pages.sale-list');
+    });
+
+    Route::get('/service-product/find-by-id/{id}','ServiceProductController@findProductById');
+    Route::get('/service-product/find-by-barcode/{barcode}','ServiceProductController@findProductByBarcode');
+    Route::get('/service-product/find-productsn-by-id-sn/{id},{sn}','ServiceProductController@findProductSNbyIdSN');
+    Route::get('/service-product/gen-barcode','ServiceProductController@getGenBarcode');
+    Route::get('/service-product/check-duplicated-sn/{id},{sn}','ServiceProductController@checkDuplicatedSN');
 });
 
-Route::get('/login',function (){
-   return view('template.login');
-});
-
-Route::get('/product/list','ProductController@view_productList');
-Route::get('/product/edit/{id}','ProductController@view_editProduct');
-Route::post('/product/edit/{id}','ProductController@editProduct');
-Route::get('/product/delete/{id}','ProductController@delete');
-
-Route::get('/product/new','ProductController@view_newProduct');
-Route::post('/product/new','ProductController@newProduct');
-
-Route::get('/product-catebrand','ProductCateBrandController@index');
-
-Route::post('/brand/new','BrandController@newBrand');
-Route::post('/category/new','CategoryController@newCategory');
-Route::get('/brand/delete/{id}','BrandController@deleteBrand');
-Route::get('/category/delete/{id}','CategoryController@deleteCategory');
-
-Route::get('/stock/in','StockController@view_stockIn');
-Route::post('/stock/in','StockController@stockIn');
-Route::get('/stock/transfer','StockController@view_stockTransfer');
-Route::get('/stock/list','StockController@view_stockList');
-Route::get('/stock/list/{reference_id}','StockController@view_stockReference');
 
 
-
-Route::get('/barcode/custom','BarcodeController@viewCustom');
-Route::post('/barcode/print','BarcodeController@viewPrint');
-
-
-Route::get('/sale-neworder', function () {
-    return view('pages.sale-neworder');
-});
-
-Route::get('/sale-list', function () {
-    return view('pages.sale-list');
-});
-
-Route::get('/service-product/find-by-id/{id}','ServiceProductController@findProductById');
-Route::get('/service-product/find-by-barcode/{barcode}','ServiceProductController@findProductByBarcode');
-Route::get('/service-product/find-productsn-by-id-sn/{id},{sn}','ServiceProductController@findProductSNbyIdSN');
-Route::get('/service-product/gen-barcode','ServiceProductController@getGenBarcode');
-Route::get('/service-product/check-duplicated-sn/{id},{sn}','ServiceProductController@checkDuplicatedSN');
 
 
 
