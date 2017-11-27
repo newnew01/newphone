@@ -36,8 +36,8 @@
 
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">ผู้ใช้งาน</span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="/user">ผู้ใช้งาน</a></li>
-                <li><a href="/role">กำหนดสิทธิ์</a></li>
+                <li><a href="/user/list">ผู้ใช้งาน</a></li>
+                <li><a href="/user/role">กำหนดสิทธิ์</a></li>
             </ul>
         </li>
 

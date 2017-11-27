@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BranchesTableSeeder::class);
         $this->call(StatusTableSeeder::class);
         $this->call(StockRefTypeTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

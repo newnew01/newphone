@@ -49,6 +49,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/stock/list','StockController@view_stockList');
     Route::get('/stock/list/{reference_id}','StockController@view_stockReference');
 
+    Route::get('/user/list','UserController@view_userList');
+    Route::get('/user/new','UserController@view_userNew');
+    Route::post('/user/new','UserController@newUser');
+    Route::get('/user/{id}','UserController@view_userDetail');
+    Route::get('/user/role','UserController@view_userRole');
+
+
 
 
     Route::get('/barcode/custom','BarcodeController@viewCustom');
