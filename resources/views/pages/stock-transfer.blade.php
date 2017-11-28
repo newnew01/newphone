@@ -123,7 +123,7 @@
                              <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ปลายทาง</div>
-                                    <select class="form-control custom-select" name="branch_id">
+                                    <select class="form-control custom-select" name="dest_branch_id">
                                         <option value="-1">[สาขา]</option>
                                         @foreach($branches as $branch)
                                             <option value="{{$branch->id}}">{{$branch->branch_name}}</option>

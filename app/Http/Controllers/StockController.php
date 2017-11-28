@@ -114,6 +114,88 @@ class StockController extends Controller
         }
     }
 
+    public function stockTransfer(Request $request)
+    {
+        $source_branch_id = 1;
+        //return $request->all();
+
+        $p = $request->all();
+        //dd($p);
+        if($request->has('product_id'))
+        {
+            $isDuplicateSN = false;
+            $duplicatedSN = '';
+            $products = [];
+            for($i=0;$i<count($p['product_id']);$i++) {
+                if($p['type_sn'][$i] == 1) {
+                    $result = ProductSN::where('product_id','=',$p['product_id'][$i])
+                        ->where('sn','=',$p['sn'][$i]);
+
+                    if($result->exists()){
+                        $duplicatedSN = $p['sn'][$i];
+                        $isDuplicateSN = true;
+                        break;
+                    }
+
+                }
+
+            }
+
+            if(!$isDuplicateSN){
+                for($i=0;$i<count($p['product_id']);$i++){
+                    $product = Product::find($p['product_id'][$i]);
+                    $ais_deal = false;
+                    //if($request->has('ais_deal_'.$i))
+                    //    $ais_deal = true;
+                    if($product->type_sn == 1){
+                        $product_sn = ProductSN::where('sn','=',$p['sn'][$i])->where('branch_id','=',$source_branch_id);
+                        if($product_sn->exists()){
+                            $p_sn = $product_sn->first();
+                            $p_sn->branch_id = $request->input('dest_branch_id');
+                            $p_sn->save();
+
+                        }
+                        //$product_sn->product_id = $p['product_id'][$i];
+                        //$product_sn->sn = $p['sn'][$i];
+                        //$product_sn->ais_deal = $ais_deal;
+                        //$product_sn->branch_id = 1;
+                        //$product_sn->save();
+
+                        //$product->amount += 1;
+                        //$product->save();
+
+                    }else{
+                        //$product->amount += $p['count'][$i];
+                        //$product->save();
+
+                        //change product amount of each branch
+                    }
+                    $products[$i] = [
+                        'id' => $product->id,
+                        'amount' => $p['count'][$i],
+                        'type_sn' => $product->type_sn,
+                        'sn' => $p['sn'][$i],
+                        'ais_deal' => $ais_deal
+                    ];
+                }
+
+                $stock_reference = $this->createStockInHistory($products);
+
+                return $this->view_stockReference($stock_reference->id);
+                //return view('pages.stock-in-document')->with(compact('stock_reference'));
+            }else{
+                //error duplicated SN
+                Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'มี SN/IMEI ซ้ำในระบบ '.$duplicatedSN]);
+                return redirect('/stock/in');
+            }
+
+
+        }else{
+            Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'ไม่มีข้อมูลสินค้าสำหรับโอน']);
+            return redirect('/stock/in');
+        }
+    }
+
     public function createStockInHistory($products)
     {
         $stock_ref = new StockReference();

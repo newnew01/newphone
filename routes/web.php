@@ -46,6 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/stock/in','StockController@view_stockIn');
     Route::post('/stock/in','StockController@stockIn');
     Route::get('/stock/transfer','StockController@view_stockTransfer');
+    Route::post('/stock/transfer','StockController@stockTransfer');
     Route::get('/stock/list','StockController@view_stockList');
     Route::get('/stock/list/{reference_id}','StockController@view_stockReference');
 
