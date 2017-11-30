@@ -16,6 +16,9 @@ class CreateProductAmountTable extends Migration
         Schema::create('product_amount', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('product_id');
+            $table->integer('branch_id');
+            $table->integer('amount');
         });
     }
 
