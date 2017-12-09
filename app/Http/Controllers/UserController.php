@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +17,9 @@ class UserController extends Controller
 
     public function view_userNew()
     {
-        return view('pages.user-new');
+        $branches = Branch::all();
+
+        return view('pages.user-new')->with(compact('branches'));
     }
 
     public function view_userDetail()

@@ -62,10 +62,10 @@
                     <label  class="col-sm-3 text-right control-label col-form-label">สาขา*</label>
                     <div class="col-sm-9">
                         <select class="custom-select col-12" id="inlineFormCustomSelect" name="branch_id">
-                            <option selected="">Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="-1">[เลือกสาขา]</option>
+                            @foreach($branches as $branch)
+                                <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
