@@ -9,6 +9,7 @@ use App\ProductSN;
 use App\StockHistory;
 use App\StockReference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Milon\Barcode\DNS1D;
 
@@ -22,7 +23,8 @@ class StockController extends Controller
 
     public function view_stockIn()
     {
-        return view('pages.stock-in');
+        $branches = Branch::all();
+        return view('pages.stock-in')->with(compact('branches'));
     }
 
     public function view_stockTransfer()
@@ -37,16 +39,38 @@ class StockController extends Controller
         return view('pages.stock-list')->with(compact('stock_reference'));
     }
 
+    public function view_stockReference($reference_id)
+    {
+        $ref_type = StockReference::find($reference_id)->ref_type;
+        switch ($ref_type){
+            case self::REF_TYPE_STOCKIN:
+                return $this->view_stockInReference($reference_id);
+                break;
+            case self::REF_TYPE_STOCKTRANSFER:
+                return $this->view_stockTransferReference($reference_id);
+                break;
+            case self::REF_TYPE_SALE:
+                return $this->view_stockSaleReference($reference_id);
+                break;
+            case self::REF_TYPE_REFUND:
+                return $this->view_stockRefundReference($reference_id);
+                break;
+            case self::REF_TYPE_REPAIR:
+                return $this->view_stockRepairReference($reference_id);
+                break;
+
+        }
+    }
+
     public function view_stockInReference($reference_id)
     {
         //dd($reference_id);
         $stock_reference = StockReference::find($reference_id);
         $ref_id_barcode = DNS1D::getBarcodePNG(sprintf('%06d', $reference_id), "C128");
 
-        if($stock_reference->ref_type == 1)
-            return view('pages.stock-in-document')
-                ->with(compact('stock_reference'))
-                ->with(compact('ref_id_barcode'));
+        return view('pages.stock-in-document')
+            ->with(compact('stock_reference'))
+            ->with(compact('ref_id_barcode'));
     }
 
     public function view_stockTransferReference($reference_id)
@@ -55,17 +79,16 @@ class StockController extends Controller
         $stock_reference = StockReference::find($reference_id);
         $ref_id_barcode = DNS1D::getBarcodePNG(sprintf('%06d', $reference_id), "C128");
 
-        if($stock_reference->ref_type == 1)
-            return view('pages.stock-transfer-document')
-                ->with(compact('stock_reference'))
-                ->with(compact('ref_id_barcode'));
+        return view('pages.stock-transfer-document')
+            ->with(compact('stock_reference'))
+            ->with(compact('ref_id_barcode'));
     }
 
     public function stockIn(Request $request)
     {
 
-        $branch_id = 1; //get data from user branch_id
-        $emp_id = 1; //user id
+        $branch_id = $request->input('source_branch_id');  //get data from user branch_id
+        $emp_id = Auth::user()->id; //user id
 
         $p = $request->all();
         //dd($p);
@@ -150,8 +173,8 @@ class StockController extends Controller
 
     public function stockTransfer(Request $request)
     {
-        $emp_id = 1;
-        $source_branch_id = 1; //get from user branch_id
+        $emp_id = Auth::user()->id;
+        $source_branch_id = $request->input('source_branch_id'); //get from user branch_id
         $dest_branch_id = $request->input('dest_branch_id');
         //return $request->all();
 

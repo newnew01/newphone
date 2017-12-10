@@ -32,4 +32,9 @@ class StockReference extends Model
     {
         return $this->belongsTo(StockRefType::class,'ref_type');
     }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class,'employee_id');
+    }
 }

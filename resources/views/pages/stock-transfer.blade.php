@@ -112,17 +112,19 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ต้นทาง</div>
-                                    <input type="text" placeholder="" class="form-control" value="นิวโฟนแม่ทา" disabled>
-                                </div>
+                            <div class="input-group">
+                                <div class="input-group-addon ">สาขารับเข้า</div>
+                                <select class="form-control custom-select" name="source_branch_id">
+                                    @foreach($branches as $branch)
+                                        <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                              <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="mdi mdi-cellphone"></i> ปลายทาง</div>
+                                    <div class="input-group-addon">ปลายทาง</div>
                                     <select class="form-control custom-select" name="dest_branch_id">
                                         <option value="-1">[สาขา]</option>
                                         @foreach($branches as $branch)

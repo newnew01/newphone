@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-body printableArea">
-                <h3><b>ใบรับสินค้าเข้า</b> [นิวโฟนแม่ทา] <span class="pull-right">เลขที่อ้างอิง: {{sprintf('%06d', $stock_reference->id)}}</span></h3>
+                <h3><b>ใบรับสินค้าเข้า</b> [{{$stock_reference->sourceBranch->branch_name}}] <span class="pull-right">เลขที่อ้างอิง: {{sprintf('%06d', $stock_reference->id)}}</span></h3>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="pull-left">
@@ -67,7 +67,7 @@
                         <div class="pull-right m-t-30 text-right">
 
                             <hr>
-                            <h3><b>ผู้รับเข้า :</b> ณัชพล</h3>
+                            <h3><b>ผู้รับเข้า :</b> {{$stock_reference->user->name}}</h3>
                         </div>
                         <div class="clearfix"></div>
 

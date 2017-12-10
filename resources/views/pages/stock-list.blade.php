@@ -61,6 +61,13 @@
                         </tr>
                     @endforeach
 
+                    @if(count($stock_reference) == 0)
+                        <tr>
+                            <td colspan="6" class="text-center">ไม่มีข้อมูล</td>
+                        </tr>
+                    @endif
+
+
                     </tbody>
                 </table>
             </div>

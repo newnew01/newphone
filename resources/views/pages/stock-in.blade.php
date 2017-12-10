@@ -97,8 +97,20 @@
                         <input type="hidden" name="count[]" value="<% product.count %>">
                     </div>
 
+                    <div class="form-group col-md-6 p-l-0">
+                        <div class="input-group">
+                            <div class="input-group-addon ">สาขารับเข้า</div>
+                            <select class="form-control custom-select" name="source_branch_id">
+                                @foreach($branches as $branch)
+                                    <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
-                    <button class="btn btn-inverse waves-effect waves-light" ng-click="clearList()"><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
+                    <button type="button" class="btn btn-inverse waves-effect waves-light" ng-click="clearList()"><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
                 </div>
             </div>
             </form>

@@ -33,4 +33,9 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($pass);
 
     }
+
+    public function Branch()
+    {
+        return $this->belongsTo(Branch::class,'branch_id');
+    }
 }

@@ -13,12 +13,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-body printableArea">
-                <h3><b>ใบโอนสินค้า</b> [นิวโฟนแม่ทา] <span class="pull-right">เลขที่อ้างอิง: {{sprintf('%06d', $stock_reference->id)}}</span></h3>
+                <h3><b>ใบโอนสินค้า</b> [{{$stock_reference->sourceBranch->branch_name}}]<span class="pull-right">เลขที่อ้างอิง: {{sprintf('%06d', $stock_reference->id)}}</span></h3>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="pull-left">
                             <address>
                                 <p class="text-muted m-l-5"><b>วันที่ :</b> <i class="fa fa-calendar"></i> {{ Carbon\Carbon::parse($stock_reference->created_at)->format('d-m-Y') }}</p>
+                                <p class="text-muted m-l-5"><b>โอนไปสาขา :</b> {{ $stock_reference->destinationBranch->branch_name }}</p>
+
                             </address>
                         </div>
                         <div class="pull-right text-right">
@@ -67,7 +69,7 @@
                         <div class="pull-right m-t-30 text-right">
 
                             <hr>
-                            <h3><b>ผู้รับเข้า :</b> ณัชพล</h3>
+                            <h3><b>ผู้รับเข้า :</b> {{$stock_reference->user->name}}</h3>
                         </div>
                         <div class="clearfix"></div>
 
