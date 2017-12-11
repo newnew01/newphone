@@ -51,6 +51,20 @@ class ServiceProductController extends Controller
             return 'null';
     }
 
+    public function findProductSnInBranch($id,$sn,$branch_id)
+    {
+        //dd($id.' '.$sn);
+        $p = ProductSN::where('product_id','=',$id)->where('sn','=',$sn)
+            ->where('branch_id','=',$branch_id);
+        if($p->exists()){
+
+            return $p->first();
+        }
+
+        else
+            return 'null';
+    }
+
     public function checkDuplicatedSN($id,$sn)
     {
         //dd($id.' '.$sn);

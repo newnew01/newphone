@@ -76,6 +76,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/service-product/find-productsn-by-id-sn/{id},{sn}','ServiceProductController@findProductSNbyIdSN');
     Route::get('/service-product/gen-barcode','ServiceProductController@getGenBarcode');
     Route::get('/service-product/check-duplicated-sn/{id},{sn}','ServiceProductController@checkDuplicatedSN');
+    Route::get('/service-product/find-productsn-in-branch/{id},{sn},{branch_id}','ServiceProductController@findProductSnInBranch');
+
 });
 
 
