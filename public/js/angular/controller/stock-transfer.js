@@ -21,17 +21,41 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
                        $scope.product_tmp = result;
                        $('#modal_sn').modal('show');
                    }else{
-                       isInList =false;
-                       for (i = 0; i < $scope.products.length; ++i) {
-                           //alert(result.id+' '+$scope.products[i].id);
-                           if(result.id == $scope.products[i].id){
-                               $scope.products[i].count++;
-                               isInList = true;
-                               break;
+
+
+
+                       $http.get("/service-product/find-product-amount-in-branch/"+result.id+','+$scope.source_branch).then(function (response) {
+                           result2 =  response.data;
+                           if(result2 == 'null'){
+                               alert('ไม่มีสินค้านี้ในสาขาของคุณ');
+                           }else{
+
+                               isInList =false;
+                               for (i = 0; i < $scope.products.length; ++i) {
+                                   //alert(result.id+' '+$scope.products[i].id);
+                                   if(result.id == $scope.products[i].id){
+                                       if($scope.products[i].count >= result2.amount){
+                                           alert('สินค้าคงเหลือในสาขาไม่เพียงพอ (คงเหลือ: '+result2.amount+')');
+                                       }else{
+                                           $scope.products[i].count++;
+                                       }
+                                       isInList = true;
+                                       break;
+                                   }
+                               }
+                               if(!isInList){
+                                   if(result2.amount >= 1){
+                                       $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'type_sn':result.type_sn,'sn':'','count':1});
+                                   }else{
+                                       alert('สินค้าคงเหลือในสาขาไม่เพียงพอ (คงเหลือ: '+result2.amount+')');
+                                   }
+                               }
+
                            }
-                       }
-                       if(!isInList)
-                           $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'type_sn':result.type_sn,'sn':'','count':1});
+                       });
+
+
+
 
                    }
                    $scope.barcode_input = '';
@@ -129,19 +153,37 @@ app.controller('StockTransferController', function($scope,$sce,$http) {
                            document.getElementById('amount_barcode').value = '';
                            document.getElementById('amount_barcode').focus();
                        }else{
-                           isInList =false;
-                           for (i = 0; i < $scope.products.length; ++i) {
-                               //alert(result.id+' '+$scope.products[i].id);
-                               if(result.id == $scope.products[i].id){
-                                   $scope.products[i].count = parseInt($scope.products[i].count) + parseInt($scope.amount);
-                                   isInList = true;
-                                   break;
-                               }
-                           }
-                           if(!isInList){
-                               $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'sn':'','count':$scope.amount});
 
-                           }
+                           $http.get("/service-product/find-product-amount-in-branch/"+result.id+','+$scope.source_branch).then(function (response) {
+                               result2 =  response.data;
+                               if(result2 == 'null'){
+                                   alert('ไม่มีสินค้านี้ในสาขาของคุณ');
+                               }else{
+
+                                   isInList =false;
+                                   for (i = 0; i < $scope.products.length; ++i) {
+                                       //alert(result.id+' '+$scope.products[i].id);
+                                       if(result.id == $scope.products[i].id){
+                                           if(result2.amount >= (parseInt($scope.products[i].count)+parseInt($scope.amount))){
+                                               $scope.products[i].count = parseInt($scope.products[i].count) + parseInt($scope.amount);
+                                           }else{
+                                               alert('สินค้าคงเหลือในสาขาไม่เพียงพอ (คงเหลือ: '+result2.amount+')');
+                                               //alert($scope.products[i].count+' '+$scope.amount);
+                                           }
+                                           isInList = true;
+                                           break;
+                                       }
+                                   }
+                                   if(!isInList){
+                                       if(result2.amount >= $scope.amount){
+                                           $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'sn':'','count':$scope.amount});
+                                       }else{
+                                           alert('สินค้าคงเหลือในสาขาไม่เพียงพอ (คงเหลือ: '+result2.amount+')');
+                                       }
+                                   }
+
+                               }
+                           });
 
                            $('#modal_amount_barcode').modal('hide');
 

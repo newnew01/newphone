@@ -11,44 +11,74 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row" ng-controller="StockInController">
-    <div class="col-md-12">
-        <div class="card card-outline-inverse">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">ข้อมูลสินค้า</h4>
-            </div>
-            <div class="card-body">
-                <div class="row p-t-20">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()" autocomplete="off">
 
-                                <span class="input-group-btn">
-                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
-                                </span>
-                            </div>
+    <form method="post" action="/stock/in" id="stock_form" style="width: 100%">
+        {{ csrf_field() }}
+        <div class="col-md-12">
+
+
+
+            <div style="display: none" ng-repeat="product in products">
+                <input type="hidden" name="product_id[]" value="<% product.id %>">
+                <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
+                <input type="hidden" name="sn[]" value="<% product.sn %>">
+                <input type="hidden" name="count[]" value="<% product.count %>">
+            </div>
+
+
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">รายละเอียดการโอน</h4>
+                </div>
+                <div class="card-body">
+
+
+
+
+                    <div class="form-group col-md-6 p-l-0">
+                        <div class="input-group">
+                            <div class="input-group-addon ">สาขารับเข้า</div>
+                            <select class="form-control custom-select" name="source_branch_id">
+                                @foreach($branches as $branch)
+                                    <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+            </div>
 
-                        <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#modal_amount_barcode">จำนวนมาก</button>
-                        <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">ข้อมูลสินค้า</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row p-t-20">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                                    <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()" autocomplete="off">
+
+                                    <span class="input-group-btn">
+                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#modal_amount_barcode">จำนวนมาก</button>
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
+
+                        </div>
+
 
                     </div>
 
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-        <div class="col-md-12">
-            <form method="post" action="/stock/in">
-                {{ csrf_field() }}
-                <div class="card card-outline-inverse">
-                <div class="card-body">
                     <div class="row">
                         <table class="table color-table danger-table">
                             <thead>
@@ -90,32 +120,22 @@
                         </table>
                     </div>
 
-                    <div style="display: none" ng-repeat="product in products">
-                        <input type="hidden" name="product_id[]" value="<% product.id %>">
-                        <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
-                        <input type="hidden" name="sn[]" value="<% product.sn %>">
-                        <input type="hidden" name="count[]" value="<% product.count %>">
-                    </div>
-
-                    <div class="form-group col-md-6 p-l-0">
-                        <div class="input-group">
-                            <div class="input-group-addon ">สาขารับเข้า</div>
-                            <select class="form-control custom-select" name="source_branch_id">
-                                @foreach($branches as $branch)
-                                    <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                </div>
+            </div>
+        </div>
 
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
+
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-body text-center">
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" onclick="document.getElementById('stock_form').submit()"><i class="mdi mdi-content-save"></i> บันทึก</button>
                     <button type="button" class="btn btn-inverse waves-effect waves-light" ng-click="clearList()"><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
                 </div>
             </div>
-            </form>
         </div>
 
+    </form>
 
 
 
@@ -210,6 +230,13 @@
     <script>
         $(document).ready(function () {
             $('#barcode_input').focus();
+
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
         });
     </script>
 @endsection

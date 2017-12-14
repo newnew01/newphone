@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductAmount;
 use App\ProductSN;
 use Illuminate\Http\Request;
 
@@ -56,6 +57,18 @@ class ServiceProductController extends Controller
         //dd($id.' '.$sn);
         $p = ProductSN::where('product_id','=',$id)->where('sn','=',$sn)
             ->where('branch_id','=',$branch_id);
+        if($p->exists()){
+
+            return $p->first();
+        }
+
+        else
+            return 'null';
+    }
+
+    public function findProductAmountInBranch($id, $branch_id)
+    {
+        $p = ProductAmount::where('product_id','=',$id)->where('branch_id','=',$branch_id);
         if($p->exists()){
 
             return $p->first();
