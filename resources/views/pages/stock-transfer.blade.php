@@ -114,7 +114,7 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-addon ">สาขารับเข้า</div>
-                                <select class="form-control custom-select" name="source_branch_id" ng-model="source_branch">
+                                <select class="form-control custom-select" name="source_branch_id">
                                     @foreach($branches as $branch)
                                         <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
                                     @endforeach
