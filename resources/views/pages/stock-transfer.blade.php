@@ -11,6 +11,59 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row" ng-controller="StockTransferController">
+
+
+
+    <form method="post" action="/stock/transfer" style="width: 100%" id="stock_form">
+        {{ csrf_field() }}
+
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">รายละเอียดการโอน</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-addon ">สาขารับเข้า</div>
+                                <select class="form-control custom-select" name="source_branch_id" onchange="document.getElementById('barcode_input').focus();">
+                                    @foreach($branches as $branch)
+                                        <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">ปลายทาง</div>
+                                    <select class="form-control custom-select" name="dest_branch_id" onchange="document.getElementById('barcode_input').focus();">
+                                        <option value="-1">[สาขา]</option>
+                                        @foreach($branches as $branch)
+                                            <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="display: none" ng-repeat="product in products">
+                        <input type="hidden" name="product_id[]" value="<% product.id %>">
+                        <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
+                        <input type="hidden" name="sn[]" value="<% product.sn %>">
+                        <input type="hidden" name="count[]" value="<% product.count %>">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
     <div class="col-md-12">
         <div class="card card-outline-inverse">
             <div class="card-header">
@@ -22,7 +75,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()">
+                                <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()" autocomplete="off">
 
                                 <span class="input-group-btn">
                                     <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
@@ -40,111 +93,56 @@
 
                 </div>
 
+                <div class="row">
+                    <table class="table color-table info-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ชื่อสินค้า</th>
+                            <th>ยี่ห้อ</th>
+                            <th>รุ่น</th>
+                            <th>SN/IMEI</th>
+                            <th>จำนวน</th>
+                            <th>AIS deal</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr ng-if="products.length == 0">
+                            <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
+                        </tr>
+
+                        <tr ng-repeat="product in products">
+                            <td><% $index+1 %></td>
+                            <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
+                            <td><% product.brand %></td>
+                            <td><% product.model %></td>
+                            <td><% product.sn %></td>
+                            <td><% product.count %></td>
+                            <td><i class="mdi mdi-check text-danger" ng-if="product.ais_deal == 1"></i> </td>
+                            <td>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">รายละเอียดสินค้า</button>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
+
     <div class="col-md-12">
-
-
-    </div>
-
-    <form method="post" action="/stock/transfer" style="width: 100%">
-        {{ csrf_field() }}
-
-
-        <div class="col-md-12">
-
-                <div class="card card-outline-inverse">
-                    <div class="card-body">
-                        <div class="row">
-                            <table class="table color-table info-table">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ชื่อสินค้า</th>
-                                    <th>ยี่ห้อ</th>
-                                    <th>รุ่น</th>
-                                    <th>SN/IMEI</th>
-                                    <th>จำนวน</th>
-                                    <th>AIS deal</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr ng-if="products.length == 0">
-                                    <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
-                                </tr>
-
-                                <tr ng-repeat="product in products">
-                                    <td><% $index+1 %></td>
-                                    <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
-                                    <td><% product.brand %></td>
-                                    <td><% product.model %></td>
-                                    <td><% product.sn %></td>
-                                    <td><% product.count %></td>
-                                    <td><i class="mdi mdi-check text-danger" ng-if="product.ais_deal == 1"></i> </td>
-                                    <td>
-                                        <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">รายละเอียดสินค้า</button>
-                                        <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div style="display: none" ng-repeat="product in products">
-                            <input type="hidden" name="product_id[]" value="<% product.id %>">
-                            <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
-                            <input type="hidden" name="sn[]" value="<% product.sn %>">
-                            <input type="hidden" name="count[]" value="<% product.count %>">
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card card-outline-inverse">
-                <div class="card-header">
-                    <h4 class="m-b-0 text-white">รายละเอียดการโอน</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <div class="input-group-addon ">สาขารับเข้า</div>
-                                <select class="form-control custom-select" name="source_branch_id">
-                                    @foreach($branches as $branch)
-                                        <option value="{{$branch->id}}" {{Auth::user()->branch_id == $branch->id ? "selected":"disabled"}}>{{$branch->branch_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">ปลายทาง</div>
-                                    <select class="form-control custom-select" name="dest_branch_id">
-                                        <option value="-1">[สาขา]</option>
-                                        @foreach($branches as $branch)
-                                            <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="mdi mdi-content-save"></i> บันทึก</button>
-                    <button type="submit" class="btn btn-inverse waves-effect waves-light" ><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
-                </div>
+        <div class="card card-outline-inverse">
+            <div class="card-body text-center">
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" onclick="document.getElementById('stock_form').submit()"><i class="mdi mdi-content-save"></i> บันทึก</button>
+                <button type="button" class="btn btn-inverse waves-effect waves-light" ng-click="clearList()"><i class="mdi mdi-delete-empty"></i> เคลียร์รายการ</button>
             </div>
         </div>
-
-
-    </form>
+    </div>
 
     <div class="modal fade" tabindex="-1" id="modal_amount_barcode" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">

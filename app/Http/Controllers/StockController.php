@@ -186,9 +186,9 @@ class StockController extends Controller
             for($i=0;$i<count($p['product_id']);$i++){
                 $product = Product::find($p['product_id'][$i]);
                 if($product->type_sn == 1){
-                    if(!$product->isInBranch($source_branch_id,p['sn'][$i])){
+                    if(!$product->isInBranch($source_branch_id,$p['sn'][$i])){
                         //return error productsn not found in branch
-                        Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'ไม่พบสินค้า SN ในสาขา ['.p['sn'][$i].']']);
+                        Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'ไม่พบสินค้า SN ในสาขา ['.$p['sn'][$i].']']);
                         return redirect('/stock/transfer');
                     }
                 }else{
@@ -273,7 +273,7 @@ class StockController extends Controller
 
         }else{
             Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'ไม่มีข้อมูลสินค้าสำหรับโอน']);
-            return redirect('/stock/in');
+            return redirect('/stock/transfer');
         }
     }
 
