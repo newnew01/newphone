@@ -2,6 +2,7 @@
 
 namespace App;
 
+use bar\baz\source_with_namespace;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -24,6 +25,27 @@ class Product extends Model
             return true;
         else
             return false;
+    }
+
+    public function isInBranch($branch_id, $sn)
+    {
+        $psn = ProductSN::where('product_id','=',$this->id)->
+            where('sn','=',$sn)->
+            where('branch_id','=',$branch_id);
+
+        return $psn->exists();
+    }
+
+    public function getAmountInBranch($branch_id)
+    {
+        $product_amount = ProductAmount::where('product_id','=',$this->id)->
+            where('branch_id','=',$branch_id);
+
+        if($product_amount->exists()){
+            return $product_amount->first()->amount;
+        }else{
+            return 0;
+        }
     }
 }
 

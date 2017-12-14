@@ -137,7 +137,7 @@ class StockController extends Controller
 
                         if($q->exists()){
                             $p_amount = $q->first();
-                            $p_amount += $p['count'][$i];
+                            $p_amount->amount += $p['count'][$i];
                             $p_amount->save();
                         } else{
                             $p_amount = new ProductAmount();
@@ -182,6 +182,24 @@ class StockController extends Controller
         //dd($p);
         if($request->has('product_id'))
         {
+            //check productsn in source branch and check product_amount in source branch
+            for($i=0;$i<count($p['product_id']);$i++){
+                $product = Product::find($p['product_id'][$i]);
+                if($product->type_sn == 1){
+                    if(!$product->isInBranch($source_branch_id,p['sn'][$i])){
+                        //return error productsn not found in branch
+                        Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'ไม่พบสินค้า SN ในสาขา ['.p['sn'][$i].']']);
+                        return redirect('/stock/transfer');
+                    }
+                }else{
+                    if($product->getAmountInBranch($source_branch_id) < $p['count'][$i]){
+                        //return error product_amount is not enough in source branch
+                        Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'สินค้าในสาขาต้นทางไม่เพียงพอ ('.$product->product_name.')']);
+                        return redirect('/stock/transfer');
+                    }
+                }
+            }
+
 
             for($i=0;$i<count($p['product_id']);$i++){
                 $product = Product::find($p['product_id'][$i]);
@@ -220,6 +238,8 @@ class StockController extends Controller
                             }
                         }else{
                             //return error source branch amount is not enough
+                            Session::flash('flash_msg_danger',['title' => 'ผิดพลาด','text' => 'สินค้าในสาขาต้นทางมีไม่เพียงพอ']);
+                            return redirect('/stock/transfer');
                         }
 
                     } else{

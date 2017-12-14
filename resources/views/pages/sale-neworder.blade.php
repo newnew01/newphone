@@ -260,12 +260,28 @@
 @endsection
 
 @section('js-bottom')
+    <script src="/assets/plugins/toast-master/js/jquery.toast.js"></script>
+
+    @include('template.flash-msg');
+
     <script>
-        source_branch = 1;
+        source_branch = {{Auth::user()->branch_id}};
 
         $(document).ready(function () {
             $('#barcode_input').focus();
         });
 
     </script>
+@endsection
+
+@section('css-head')
+    <link rel="stylesheet" href="/assets/plugins/dropify/dist/css/dropify.min.css">
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
+
 @endsection
