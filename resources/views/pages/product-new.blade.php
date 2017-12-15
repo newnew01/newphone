@@ -11,130 +11,130 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body p-b-0">
-                <form class="form" method="post" action="/product/new" id="addProductForm" autocomplete="off">
+    <form class="form" method="post" action="/product/new" id="addProductForm" style="width: 100%" autocomplete="off">
 
-                <div class="row">
-                        {{csrf_field()}}
-                        <div class="col-md-6">
-                            <div class="card card-outline-inverse">
-                                <div class="card-header">
-                                    <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
-                                </div>
-                                <div class="card-body">
+        <div class="row">
+            {{csrf_field()}}
+            <div class="col-md-6">
+                <div class="card card-outline-inverse">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">รายละเอียดสินค้า</h4>
+                    </div>
+                    <div class="card-body">
 
-                                        <div class="switch">
-                                            <label>เปิดใช้ SN / IMEI ?
-                                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span>
-                                            </label>
-                                        </div>
+                        <div class="switch">
+                            <label>เปิดใช้ SN / IMEI ?
+                                <input type="checkbox" name="type_sn"><span class="lever switch-col-red"></span>
+                            </label>
+                        </div>
 
-                                        <div class="form-group p-t-20">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
-                                                <select class="form-control custom-select" name="category_id">
-                                                    <option value="-1">[หมวดหมู่]</option>
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
-                                                    @endforeach
-                                                </select>
+                        <div class="form-group p-t-20">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-cube-send"></i></div>
+                                <select class="form-control custom-select" name="category_id">
+                                    <option value="-1">[หมวดหมู่]</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->cate_name}}</option>
+                                    @endforeach
+                                </select>
 
-                                                <span class="input-group-btn">
+                                <span class="input-group-btn">
                                                 <a  href="/product-catebrand"   class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</a>
                                                 </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
-                                                <select class="form-control custom-select" name="brand_id">
-                                                    <option value="-1">[ยี่ห้อ]</option>
-                                                    @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="input-group-btn">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
+                                <select class="form-control custom-select" name="brand_id">
+                                    <option value="-1">[ยี่ห้อ]</option>
+                                    @foreach($brands as $brand)
+                                        <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="input-group-btn">
                                                     <a  href="/product-catebrand"   class="btn waves-effect waves-light btn-success"><i class="mdi mdi-library-plus"></i> เพิ่ม</a>
                                                 </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-controller="ProductNewController">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()">
-                                                <span class="input-group-btn">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-controller="ProductNewController">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                                <input type="text" class="form-control" name="barcode" placeholder="บาร์โค้ด" ng-model="barcode_" ng-keyup="$event.keyCode == 13 && checkDuplicatedBarcode()" ng-blur="checkDuplicatedBarcode()">
+                                <span class="input-group-btn">
                                                     <span class="btn waves-effect waves-light btn-success" ng-click="getGenBarcode()">รันบาร์โค้ด</span>
                                                 </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-tag-text-outline"></i></div>
-                                                <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
-                                                <input type="text" class="form-control" name="model" placeholder="รุ่น">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
-                                                <input type="text" class="form-control" name="price" placeholder="ราคา">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
-                                                <input type="text" class="form-control" name="description" placeholder="รายละเอียด">
-                                            </div>
-                                        </div>
-
-
-
-                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="card" ng-controller="ProductNewController">
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" ng-click="startWebcam()" ><i class="mdi mdi-camera"></i> ถ่ายจากกล้อง</button>
-                                    <h4 class="card-title" >รูปภาพสินค้า</h4>
-
-
-                                    <div id="image_input">
-                                        <input type="file" name="image" class="dropify" data-height="300" />
-                                    </div>
-                                    <div id="webcam_input" ng-bind-html="webcam_input">
-
-                                    </div>
-                                    <div id="results"></div>
-                                    <input name="img_input" id="img_input" type="hidden">
-
-
-
-
-                                </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-tag-text-outline"></i></div>
+                                <input type="text" class="form-control" name="product_name" placeholder="ชื่อสินค้า">
                             </div>
                         </div>
-                        <div class="col-md-12 p-b-20">
-                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
-                            <a href="/product/list" class="btn btn-inverse waves-effect waves-light">ย้อนกลับ</a>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-dns"></i></div>
+                                <input type="text" class="form-control" name="model" placeholder="รุ่น">
+                            </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-currency-btc"></i></div>
+                                <input type="text" class="form-control" name="price" placeholder="ราคา">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="mdi mdi-format-list-bulleted"></i></div>
+                                <input type="text" class="form-control" name="description" placeholder="รายละเอียด">
+                            </div>
+                        </div>
+
+
+
+                    </div>
                 </div>
-                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card" ng-controller="ProductNewController">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-success pull-right" ng-click="startWebcam()" ><i class="mdi mdi-camera"></i> ถ่ายจากกล้อง</button>
+                        <h4 class="card-title" >รูปภาพสินค้า</h4>
+
+
+                        <div id="image_input" class="text-center">
+                            <img src="/assets/images/no-image.png" width="500px" >
+                        </div>
+                        <div id="webcam_input" ng-bind-html="webcam_input">
+
+                        </div>
+                        <div id="results"></div>
+                        <input name="img_input" id="img_input" type="hidden">
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 p-b-20">
+
+            </div>
+
         </div>
-    </div>
-    </div>
+        <div class="card card-outline-inverse">
+            <div class="card-body text-center">
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">บันทึก</button>
+                <a href="/product/list" class="btn btn-inverse waves-effect waves-light">ย้อนกลับ</a>
+            </div>
+        </div>
+    </form>
+
 
 </div>
 
@@ -218,7 +218,7 @@
             Webcam.snap( function(data_uri) {
                 // display results in page
                 document.getElementById('webcam_input').innerHTML =
-                    '<img src="'+data_uri+'"/>';
+                    '<img width="100%" src="'+data_uri+'"/>';
 
                 $('#img_input').val(data_uri.replace('data:image/jpeg;base64,',''));
             } );
@@ -246,5 +246,17 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <style>
+        #webcam_input #webcam{
+            width: 100% !important;
+        }
+
+        #webcam video{
+            width: 100% !important;
+        }
+
+
+    </style>
 
 @endsection

@@ -26,15 +26,15 @@ app.controller('ProductNewController', function($scope,$sce,$http) {
         $scope.image_input = "";
         document.getElementById('webcam_input').innerHTML =
             '<div id="webcam"></div>' +
-            '<button type="button" class="btn  waves-effect waves-light btn-rounded btn-info pull-right m-t-20" onclick="captureWebcam()" >จับภาพ</button>';
+            '<button type="button" class="btn btn-block btn-lg btn-success" onclick="captureWebcam()" ><i class="mdi mdi-camera-iris"> จับภาพ</button>';
         //$scope.webcam_input = $sce.trustAsHtml('<div id="webcam"></div>' +
         //    '<button type="button" class="btn  waves-effect waves-light btn-rounded btn-info pull-right m-t-20" onclick="captureWebcam()" >จับภาพ</button>');
         $('#image_input').html('');
 
         setTimeout(function(){
             Webcam.set({
-                width: 390,
-                height: 294,
+                width: 640,
+                height: 480,
                 image_format: 'jpeg',
                 jpeg_quality: 90
             });
