@@ -21,8 +21,8 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     $scope.amount_barcode = '';
     $scope.amount = '';
     $scope.source_branch = source_branch;
-    $scope.discount = {};
-    $scope.free_gift = {};
+    $scope.discount = [];
+    $scope.free_gift = [];
 
     $scope.getTotal = function(){
         var total = 0;
@@ -37,6 +37,29 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
 
         }
         return total;
+    }
+
+    $scope.getTotalDiscount = function(){
+        var total = 0;
+
+        var length= 0;
+        for(var key in $scope.discount) {
+            if($scope.discount.hasOwnProperty(key)){
+                length++;
+            }
+        }
+
+        //alert($scope.discount[0]);
+        for(var i=0;i < length;i++){
+            //alert($scope.discount);
+            var discount = $scope.discount[i];
+            if(discount == null)
+                discount = 0;
+            //alert($scope.free_gift[i]);
+            total += parseInt(discount);
+
+        }
+        return parseInt(total);
     }
 
 
@@ -82,7 +105,9 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     }
 
     $scope.removeFromList = function (index) {
-        $scope.products.splice( index, 1 );
+        $scope.products.splice(index, 1 );
+        $scope.discount.splice(index,1);
+        $scope.free_gift.splice(index,1);
         document.getElementById('barcode_input').value = '';
         document.getElementById('barcode_input').focus();
     }

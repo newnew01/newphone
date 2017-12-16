@@ -43,8 +43,9 @@
                             <th width="30px">#</th>
                             <th>สินค้า</th>
                             <th width="70px" class="text-center">จำนวน</th>
-                            <th width="90px" class="text-center">ราคา/หน่วย</th>
+                            <th width="120px" class="text-center">ราคา/หน่วย</th>
                             <th width="90px" class="text-center">ราคารวม</th>
+                            <th width="120px" class="text-center">ราคาสุทธิ</th>
                             <th width="90px" class="text-center">ส่วนลด</th>
                             <th width="90px" class="text-center">แถม</th>
                             <th width="80px"></th>
@@ -61,6 +62,7 @@
                             <td ><span class="tooltip_description" data-toggle="tooltip" title="<% product.description %>" tooltip><% product.product_name %> <% product.brand %> <% product.model %> <span ng-if="product.ais_deal == 1">(AIS deal)</span> <span ng-if="product.sn != ''">[<% product.sn %>]</span></span></td>
                             <td class="text-center"><% product.count %></td>
                             <td class="text-center"><% product.price %></td>
+                            <td class="text-center"><span><% (product.price*product.count) %></span></td>
                             <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
                             <td class="text-center">
                                 <input value='0' type="text" style="width: 100%" name="discount_<% $index %>" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]">
@@ -75,30 +77,23 @@
                             </td>
                         </tr>
 
-                        <tr  ng-if="products.length > 0">
+                        <tr  ng-if="false">
                             <td></td>
                             <td ></td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
-                            <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
-                            <td class="text-center">
-                                <input value='0' type="text" style="width: 100%" name="discount_<% $index %>" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" id="free_gift_<% $index %>" class="filled-in chk-col-red" name="free_gift_<% $index %>" ng-model="free_gift[$index]" />
-                                <label for="free_gift_<% $index %>"></label>
-                            </td>
-
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
-                            </td>
+                            <td class="text-center font-bold"><% getTotal()+getTotalDiscount() %></td>
+                            <td class="text-center font-bold"><% getTotal() %></td>
+                            <td class="text-center font-bold"><% getTotalDiscount() %></td>
+                            <td class="text-center"></td>
+                            <td></td>
                         </tr>
 
                         </tbody>
                     </table>
 
                     <div class="col-md-12 text-right">
-                        <h3 class="p-r-20">ราคาสุทธิ: <% getTotal() %></h3>
+                        <h3 class="p-r-20 font-bold">ราคาสุทธิ: <% getTotal() %></h3>
                     </div>
 
 
