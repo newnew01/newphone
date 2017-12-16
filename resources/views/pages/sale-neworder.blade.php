@@ -37,6 +37,70 @@
 
                     </div>
 
+                    <table class="table color-table warning-table">
+                        <thead>
+                        <tr>
+                            <th width="30px">#</th>
+                            <th>สินค้า</th>
+                            <th width="70px" class="text-center">จำนวน</th>
+                            <th width="90px" class="text-center">ราคา/หน่วย</th>
+                            <th width="90px" class="text-center">ราคารวม</th>
+                            <th width="90px" class="text-center">ส่วนลด</th>
+                            <th width="90px" class="text-center">แถม</th>
+                            <th width="80px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr ng-if="products.length == 0">
+                            <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
+                        </tr>
+
+                        <tr ng-repeat="product in products">
+                            <td><% $index+1 %></td>
+                            <td ><span class="tooltip_description" data-toggle="tooltip" title="<% product.description %>" tooltip><% product.product_name %> <% product.brand %> <% product.model %> <span ng-if="product.ais_deal == 1">(AIS deal)</span> <span ng-if="product.sn != ''">[<% product.sn %>]</span></span></td>
+                            <td class="text-center"><% product.count %></td>
+                            <td class="text-center"><% product.price %></td>
+                            <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
+                            <td class="text-center">
+                                <input value='0' type="text" style="width: 100%" name="discount_<% $index %>" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" id="free_gift_<% $index %>" class="filled-in chk-col-red" name="free_gift_<% $index %>" ng-model="free_gift[$index]" />
+                                <label for="free_gift_<% $index %>"></label>
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
+                            </td>
+                        </tr>
+
+                        <tr  ng-if="products.length > 0">
+                            <td></td>
+                            <td ></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
+                            <td class="text-center">
+                                <input value='0' type="text" style="width: 100%" name="discount_<% $index %>" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" id="free_gift_<% $index %>" class="filled-in chk-col-red" name="free_gift_<% $index %>" ng-model="free_gift[$index]" />
+                                <label for="free_gift_<% $index %>"></label>
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <div class="col-md-12 text-right">
+                        <h3 class="p-r-20">ราคาสุทธิ: <% getTotal() %></h3>
+                    </div>
+
 
                 </div>
 
@@ -48,69 +112,19 @@
         {{ csrf_field() }}
 
 
-        <div class="col-md-12">
-
-            <div class="card card-outline-inverse">
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table color-table warning-table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>ชื่อสินค้า</th>
-                                <th>ยี่ห้อ</th>
-                                <th>รุ่น</th>
-                                <th>SN/IMEI</th>
-                                <th>จำนวน</th>
-                                <th>AIS deal</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <tr ng-if="products.length == 0">
-                                <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
-                            </tr>
-
-                            <tr ng-repeat="product in products">
-                                <td><% $index+1 %></td>
-                                <td ><span data-toggle="tooltip" title="<% product.description %>"><% product.product_name %></span></td>
-                                <td><% product.brand %></td>
-                                <td><% product.model %></td>
-                                <td><% product.sn %></td>
-                                <td><% product.count %></td>
-                                <td><i class="mdi mdi-check text-danger" ng-if="product.ais_deal == 1"></i> </td>
-                                <td>
-                                    <button type="button" class="btn waves-effect waves-light btn-xs btn-primary">รายละเอียดสินค้า</button>
-                                    <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
-                                </td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div style="display: none" ng-repeat="product in products">
-                        <input type="hidden" name="product_id[]" value="<% product.id %>">
-                        <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
-                        <input type="hidden" name="sn[]" value="<% product.sn %>">
-                        <input type="hidden" name="count[]" value="<% product.count %>">
-                    </div>
-                </div>
-            </div>
+        <div style="display: none" ng-repeat="product in products">
+            <input type="hidden" name="product_id[]" value="<% product.id %>">
+            <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
+            <input type="hidden" name="sn[]" value="<% product.sn %>">
+            <input type="hidden" name="count[]" value="<% product.count %>">
         </div>
 
-
-
-    </form>
-
-    <div class="col-md-12">
-        <div class="card card-outline-info">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">ข้อมูลลูกค้า</h4>
-            </div>
-            <div class="card-body">
-                <form action="#">
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">ข้อมูลลูกค้า</h4>
+                </div>
+                <div class="card-body">
                     <div class="form-body">
                         <div class="row p-t-20">
                             <div class="col-md-6">
@@ -197,10 +211,12 @@
                         <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> บันทึกใบเสร็จ</button>
                         <button type="button" class="btn btn-inverse">เคลียร์ข้อมูล</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
+
 
     <div class="modal fade" tabindex="-1" id="modal_amount_barcode" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">

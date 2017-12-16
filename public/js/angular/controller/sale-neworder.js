@@ -1,3 +1,18 @@
+app.directive('tooltip', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            $(element).hover(function(){
+                // on mouseenter
+                $(element).tooltip('show');
+            }, function(){
+                // on mouseleave
+                $(element).tooltip('hide');
+            });
+        }
+    };
+});
+
 app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     $scope.barcode_input = '';
     $scope.products = [];
@@ -6,6 +21,23 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     $scope.amount_barcode = '';
     $scope.amount = '';
     $scope.source_branch = source_branch;
+    $scope.discount = {};
+    $scope.free_gift = {};
+
+    $scope.getTotal = function(){
+        var total = 0;
+        for(var i = 0; i < $scope.products.length; i++){
+            var product = $scope.products[i];
+            //alert($scope.discount[i]);
+            if($scope.discount[i] == null)
+                $scope.discount[i] = 0;
+            //alert($scope.free_gift[i]);
+            if(!$scope.free_gift[i])
+                total += (product.price * product.count)-$scope.discount[i];
+
+        }
+        return total;
+    }
 
 
     $scope.addProductToList = function () {
@@ -30,11 +62,15 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
                                 break;
                             }
                         }
-                        if(!isInList)
-                            $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'type_sn':result.type_sn,'sn':'','count':1});
+                        if(!isInList){
+                            $scope.products.push({'id':result.id,'product_name':result.product_name,'description':result.description,'brand':result.brand.brand_name,'model':result.model,'type_sn':result.type_sn,'sn':'','count':1,'price':result.price});
+
+                        }
+
 
                     }
                     $scope.barcode_input = '';
+
 
                 }
             });
@@ -79,7 +115,7 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
                     }
 
                     if(!isInList){
-                        $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1,'ais_deal':$scope.product_tmp.ais_deal});
+                        $scope.products.push({'id':$scope.product_tmp.id,'product_name':$scope.product_tmp.product_name,'description':$scope.product_tmp.description,'brand':$scope.product_tmp.brand.brand_name,'model':$scope.product_tmp.model,'type_sn':$scope.product_tmp.type_sn,'sn':$scope.product_tmp.sn,'count':1,'ais_deal':$scope.product_tmp.ais_deal,'price':$scope.product_tmp.price});
                         $scope.imei_sn_input = '';
                         $('#modal_sn').modal('hide');
                         //$scope.$apply();
@@ -103,6 +139,7 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
             //alert($scope.imei_sn_input);
 
         }
+
 
     }
 
@@ -177,6 +214,7 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     $('#modal_sn').on('hidden.bs.modal', function (e) {
         document.getElementById('imei_sn_input').value = '';
         document.getElementById('barcode_input').focus();
+        //$('.tooltip_description').tooltip();
         $scope.$apply();
     });
 
