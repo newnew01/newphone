@@ -99,6 +99,16 @@
 
                 </div>
 
+                <div class="form-group m-b-0 m-t-20">
+                    <div class="checkbox checkbox-success " style="display: inline">
+                        <input id="checkbox1" type="checkbox">
+                        <label for="checkbox1"> ออกใบเสร็จราคาเต็ม </label>
+                    </div>
+
+
+                </div>
+
+
 
 
             </div>
