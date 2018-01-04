@@ -4,60 +4,405 @@ use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-        DB::table('products')->insert([
-            'product_name' => 'โทรศัพท์มือถือ',
-            'brand_id' => 1,
-            'model' => 'Y53',
-            'category_id' => 1,
-            'description' => 'โทรศัพท์สมาทร์โฟนรุ่นใหม่ล่าสุด',
-            'barcode' => '111',
-            'type_sn' => 1,
-            'image' => '/assets/images/products/product-1.jpg'
+        
 
-        ]);
-
-        DB::table('products')->insert([
-            'product_name' => 'โทรศัพท์มือถือ',
-            'brand_id' => 2,
-            'model' => 'A37',
-            'category_id' => 1,
-            'description' => 'โทรศัพท์สมาทร์โฟนรุ่นใหม่ล่าสุด',
-            'barcode' => '222',
-            'type_sn' => 1,
-            'image' => '/assets/images/products/product-2.jpg'
-        ]);
-
-        DB::table('products')->insert([
-            'product_name' => 'สายชาจ USB',
-            'brand_id' => 3,
-            'category_id' => 4,
-            'description' => 'โทรศัพท์สมาทร์โฟนรุ่นใหม่ล่าสุด',
-            'barcode' => '333',
-            'type_sn' => 0,
-            'image' => '/assets/images/products/product-3.jpg'
-        ]);
-
-
-
-        for($i=0;$i<20;$i++){
-            DB::table('products')->insert([
-                'product_name' => str_random(15),
-                'brand_id' => random_int(1,10),
-                'model' => str_random(5),
-                'category_id' => random_int(1,3),
-                'description' => str_random(30),
-                'barcode' => random_int(10000,99999),
-                'type_sn' => (rand(0,1) == 1)
-
-            ]);
-
-        }
+        \DB::table('products')->delete();
+        
+        \DB::table('products')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'โทรศัพท์มือถือ',
+                'brand_id' => 1,
+                'model' => 'Y53',
+                'category_id' => 1,
+                'description' => 'โทรศัพท์สมาทร์โฟนรุ่นใหม่ล่าสุด',
+                'amount' => 0,
+                'price' => 4990,
+                'type_sn' => 1,
+                'barcode' => '111',
+                'image' => '/assets/images/products/product-1.jpg',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'created_at' => NULL,
+                'updated_at' => '2017-12-14 08:47:16',
+                'product_name' => 'โทรศัพท์มือถือ',
+                'brand_id' => 2,
+                'model' => 'A37',
+                'category_id' => 1,
+                'description' => 'โทรศัพท์สมาทร์โฟนรุ่นใหม่ล่าสุด',
+                'amount' => 2,
+                'price' => 4990,
+                'type_sn' => 1,
+                'barcode' => '222',
+                'image' => '/assets/images/products/product-2.jpg',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'created_at' => NULL,
+                'updated_at' => '2017-12-14 08:51:58',
+                'product_name' => 'สายชาจ USB',
+                'brand_id' => 3,
+                'model' => NULL,
+                'category_id' => 4,
+                'description' => 'สายชาจยี่ห้อ Huawei รองรับ Fast Charge',
+                'amount' => 9,
+                'price' => 190,
+                'type_sn' => 0,
+                'barcode' => '333',
+                'image' => '/assets/images/products/product-3.jpg',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => '6IVLkiee5Qli6Sj',
+                'brand_id' => 6,
+                'model' => '2r0cv',
+                'category_id' => 2,
+                'description' => 'X7KCHi3x877KhlRH3KSwb5GmI8Y7km',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '49483',
+                'image' => NULL,
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'IRATg4EBnjqGSar',
+                'brand_id' => 5,
+                'model' => 'er4f3',
+                'category_id' => 1,
+                'description' => 'vYMVb1fNq1GjBESQ19iOEiYqSViitk',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '47214',
+                'image' => NULL,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'sKa0dq5LAYNl42f',
+                'brand_id' => 1,
+                'model' => 'tdy4E',
+                'category_id' => 2,
+                'description' => 'uxjyv2rQ4Pu1ixHluoQGnZDM7qkUPz',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '56292',
+                'image' => NULL,
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'mySR3V8hvLnLsRU',
+                'brand_id' => 10,
+                'model' => 'YeUHr',
+                'category_id' => 2,
+                'description' => 'VYs8sF0maICoHXkRAGZ9uJEOWZiTh2',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '82689',
+                'image' => NULL,
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => '3pM8LT5nglbqPBx',
+                'brand_id' => 4,
+                'model' => 'tk79U',
+                'category_id' => 2,
+                'description' => 'lh3io8qAMjCGu5pF5b0YjZW1EQvlJ6',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '34542',
+                'image' => NULL,
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'PjMRtrV1kxXdArf',
+                'brand_id' => 10,
+                'model' => 'F1EYo',
+                'category_id' => 3,
+                'description' => 'YTfNsnCXjeEufR38QR5c2gP7fn4NuF',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '46391',
+                'image' => NULL,
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'IsIKOvgzXGFK3jp',
+                'brand_id' => 7,
+                'model' => 'qdtie',
+                'category_id' => 3,
+                'description' => '5qec7y4INNn4u1mN6sJgDkJPn8J1f5',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '83365',
+                'image' => NULL,
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'TBfYBuURuEUfGtQ',
+                'brand_id' => 3,
+                'model' => 'PT4rR',
+                'category_id' => 1,
+                'description' => 'DhtN0qijDzrfEwgJxiuY9hu9CA7pak',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '95858',
+                'image' => NULL,
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'X13H2pONkmKKFTP',
+                'brand_id' => 3,
+                'model' => 'giIW1',
+                'category_id' => 2,
+                'description' => 'VeADiMwIpTnLGpTXZqd818JhVPZVWF',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '38217',
+                'image' => NULL,
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'B7uhftHBuVZvz7I',
+                'brand_id' => 10,
+                'model' => 'lOkxc',
+                'category_id' => 3,
+                'description' => 'YPcDlpz7E6gj24GnmqSgYO7mcb5Kuc',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '62966',
+                'image' => NULL,
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'stvsQhX73garlPA',
+                'brand_id' => 6,
+                'model' => 'c1fkh',
+                'category_id' => 3,
+                'description' => '6zJAmOU8eXRGz4M6o6dCDKSDNq6ZGM',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '43522',
+                'image' => NULL,
+            ),
+            14 => 
+            array (
+                'id' => 15,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'Q3ONuK6IcO8mTT7',
+                'brand_id' => 10,
+                'model' => '6vDik',
+                'category_id' => 3,
+                'description' => 'xtEKs1luEWBZpdvBZm4HqxDFqu7c3N',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '35585',
+                'image' => NULL,
+            ),
+            15 => 
+            array (
+                'id' => 16,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'FDFsdJDOumRpuqx',
+                'brand_id' => 6,
+                'model' => 'H8mJp',
+                'category_id' => 3,
+                'description' => '23oaIld3T7b5fPjLzymLame1yqrPhd',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '24746',
+                'image' => NULL,
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'F2PLkbNbZhK86rY',
+                'brand_id' => 2,
+                'model' => 'Wf7Dd',
+                'category_id' => 1,
+                'description' => '1r2Wo6unaE8HgoslipG8IO6tpuFTJK',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '89207',
+                'image' => NULL,
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'JJcbmTO80FP572r',
+                'brand_id' => 8,
+                'model' => 'aAoN6',
+                'category_id' => 1,
+                'description' => 'tyo44wmZnws1wojWIhYmA9YOtZU0Cj',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '36604',
+                'image' => NULL,
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'FpBRbM4gxVAcp8k',
+                'brand_id' => 3,
+                'model' => 'BXg27',
+                'category_id' => 3,
+                'description' => '5glLGFSIZAcT17cI12mXYREQChQhaZ',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '35721',
+                'image' => NULL,
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'PaVeenf03iDL7Dm',
+                'brand_id' => 8,
+                'model' => 'UZ9Sj',
+                'category_id' => 1,
+                'description' => 'TvZWpyFuDePwDSy4I72IFgRsTRhODV',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '74656',
+                'image' => NULL,
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'voI8lifvDnCRQAV',
+                'brand_id' => 3,
+                'model' => 'aprQg',
+                'category_id' => 2,
+                'description' => 'b0MN4DEu3pGZuXfYdxvfrImN4NP5nH',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '28454',
+                'image' => NULL,
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'daFVxgRUkkJs2JZ',
+                'brand_id' => 4,
+                'model' => 'zEBba',
+                'category_id' => 3,
+                'description' => 'aC3IBGkOk7RhI900pWYyaLti1He0PZ',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 0,
+                'barcode' => '92193',
+                'image' => NULL,
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'product_name' => 'F78LOz86xyfSyTL',
+                'brand_id' => 1,
+                'model' => 'uV9QU',
+                'category_id' => 3,
+                'description' => 'F1CCpzQ48PsLemK9RsemARHlEOC3zg',
+                'amount' => 0,
+                'price' => 0,
+                'type_sn' => 1,
+                'barcode' => '53892',
+                'image' => NULL,
+            ),
+            23 => 
+            array (
+                'id' => 24,
+                'created_at' => '2017-12-15 07:51:34',
+                'updated_at' => '2017-12-15 07:53:32',
+                'product_name' => 'โทรศัพท์มือถือ',
+                'brand_id' => 1,
+                'model' => 'Y65',
+                'category_id' => 1,
+                'description' => 'โทรศัพท์มือถือยี่ห้อ Vivo Y65',
+                'amount' => 1,
+                'price' => 6990,
+                'type_sn' => 1,
+                'barcode' => '11112222000001',
+                'image' => '/assets/images/products/product-24.jpg',
+            ),
+        ));
+        
+        
     }
 }

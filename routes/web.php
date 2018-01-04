@@ -15,7 +15,7 @@ use Intervention\Image\Facades\Image;
 use Milon\Barcode\DNS1D;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 

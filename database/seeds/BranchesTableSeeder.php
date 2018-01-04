@@ -4,24 +4,56 @@ use Illuminate\Database\Seeder;
 
 class BranchesTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-        $branches = [
-            'นิวโฟนแม่ทา',
-            'นิวโฟนบ้านโฮ่ง',
-            'เอสเคแม่ทา',
-            'เอสเคบ้านแซม',
-            'เอสเคบ้านโฮ่ง'
-        ];
-        foreach ($branches as $branch){
-            DB::table('branches')->insert([
-                'branch_name' => $branch
-            ]);
-        }
+        
+
+        \DB::table('branches')->delete();
+        
+        \DB::table('branches')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'branch_name' => 'นิวโฟนแม่ทา',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'branch_name' => 'นิวโฟนบ้านโฮ่ง',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'branch_name' => 'เอสเคแม่ทา',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'branch_name' => 'เอสเคบ้านแซม',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'branch_name' => 'เอสเคบ้านโฮ่ง',
+            ),
+        ));
+        
+        
     }
 }
