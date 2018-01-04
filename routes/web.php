@@ -63,9 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/barcode/print','BarcodeController@viewPrint');
 
 
-    Route::get('/sale-neworder', function () {
-        return view('pages.sale-neworder');
-    });
+    Route::get('/sale/neworder','SaleController@view_newOrder');
+
+    Route::post('/sale/neworder','SaleController@newOrder');
 
     Route::get('/sale-list', function () {
         return view('pages.sale-list');

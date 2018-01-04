@@ -14,17 +14,17 @@
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-package-variant-closed"></i><span class="hide-menu">สต๊อคสินค้า</span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="/stock/in">รับสินค้าเข้า </a></li>
+                <li><a href="/stock/in">รับสินค้าเข้าใหม่</a></li>
                 <li><a href="/stock/transfer">โอนสินค้า</a></li>
                 <li><a href="/stock/list">รายการทำสต๊อค</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">การขาย</span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="/sale-neworder">ขายใหม่ </a></li>
-                <li><a href="/sale-list">รายการขาย</a></li>
-                <li><a href="/sale-topup">เติมเงิน</a></li>
-                <li><a href="/sale-service">บิลบริการ</a></li>
+                <li><a href="/sale/neworder">ขายใหม่ </a></li>
+                <li><a href="/sale/list">รายการขาย</a></li>
+                <li><a href="/sale/topup">เติมเงิน</a></li>
+                <li><a href="/sale/service">บิลบริการ</a></li>
             </ul>
         </li>
         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-barcode"></i><span class="hide-menu">บาร์โค้ด</span></a>

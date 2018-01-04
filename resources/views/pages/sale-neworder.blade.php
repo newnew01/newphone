@@ -99,11 +99,13 @@
 
                 </div>
 
+
+
             </div>
         </div>
     </div>
 
-    <form method="post" action="/stock/transfer" style="width: 100%">
+    <form method="post" action="/sale/neworder" style="width: 100%">
         {{ csrf_field() }}
 
 
@@ -112,6 +114,9 @@
             <input type="hidden" name="type_sn[]" value="<% product.type_sn %>">
             <input type="hidden" name="sn[]" value="<% product.sn %>">
             <input type="hidden" name="count[]" value="<% product.count %>">
+            <input type="hidden" name="discount[]" value="<% discount[$index] %>">
+            <input type="hidden" name="free_gift[]" value="<% free_gift[$index] %>">
+
         </div>
 
         <div class="col-md-12">
@@ -122,41 +127,48 @@
                 <div class="card-body">
                     <div class="form-body">
                         <div class="row p-t-20">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">ชื่อ</label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="John doe">
-                                    <small class="form-control-feedback"> This is inline help </small> </div>
+                                    <input type="text" id="firstName" class="form-control">
+                                </div>
                             </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
+
+                            <div class="col-md-5">
+                                <div class="form-group">
                                     <label class="control-label">นามสกุล</label>
-                                    <input type="text" id="lastName" class="form-control form-control-danger" placeholder="12n">
-                                    <small class="form-control-feedback"> This field has error. </small> </div>
+                                    <input type="text" id="lastName" class="form-control">
+                                </div>
                             </div>
-                            <!--/span-->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">เพศ</label>
+                                    <select class="form-control custom-select" name="gender">
+                                        <option value="1">ชาย</option>
+                                        <option value="2">หญิง</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                         <!--/row-->
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group has-success">
-                                    <label class="control-label">เพศ</label>
-                                    <select class="form-control custom-select">
-                                        <option value="">ชาย</option>
-                                        <option value="">หญิง</option>
-                                    </select>
-                                    <small class="form-control-feedback"> Select your gender </small> </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label">เบอร์โทร</label>
+                                    <input type="text" id="telNo" class="form-control">
+                                </div>
                             </div>
-                            <!--/span-->
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <div class="form-group">
                                     <label class="control-label">วันเดือนปีเกิด</label>
-                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                    <input type="text" class="form-control" placeholder="วว/ดด/ปปปป">
                                 </div>
                             </div>
                             <!--/span-->
                         </div>
+
+
 
                         <h3 class="box-title m-t-40">ที่อยู่</h3>
                         <hr>
@@ -202,6 +214,17 @@
                             <!--/span-->
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label>หมายเหตุ</label>
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-outline-inverse">
+                <div class="card-body text-center">
                     <div class="form-actions">
                         <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> บันทึกใบเสร็จ</button>
                         <button type="button" class="btn btn-inverse">เคลียร์ข้อมูล</button>
