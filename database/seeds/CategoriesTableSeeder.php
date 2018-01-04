@@ -20,37 +20,37 @@ class CategoriesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'cate_name' => 'โทรศัพท์มือถือ',
+                'created_at' => '2017-12-28 08:03:33',
+                'updated_at' => '2017-12-28 08:03:33',
+                'cate_name' => 'โทรศัพท์',
             ),
             1 => 
             array (
                 'id' => 2,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'cate_name' => 'สายชาจ',
+                'created_at' => '2017-12-28 08:04:00',
+                'updated_at' => '2017-12-28 08:04:00',
+                'cate_name' => 'ฟิล์มกันรอย',
             ),
             2 => 
             array (
                 'id' => 3,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'cate_name' => 'ลำโพง',
+                'created_at' => '2017-12-28 08:05:02',
+                'updated_at' => '2017-12-28 08:05:02',
+                'cate_name' => 'อุปกรณ์ชาร์จ',
             ),
             3 => 
             array (
                 'id' => 4,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'cate_name' => 'อุปกรณ์เสริมอื่นๆ',
+                'created_at' => '2017-12-28 08:05:19',
+                'updated_at' => '2017-12-28 08:05:19',
+                'cate_name' => 'หูฟัง',
             ),
             4 => 
             array (
                 'id' => 5,
-                'created_at' => '2017-12-11 07:18:56',
-                'updated_at' => '2017-12-11 07:18:56',
-                'cate_name' => 'TEST',
+                'created_at' => '2017-12-28 11:29:52',
+                'updated_at' => '2017-12-28 11:29:52',
+                'cate_name' => 'ที่วางมือถือ',
             ),
         ));
         
