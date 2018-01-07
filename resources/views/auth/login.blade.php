@@ -37,7 +37,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url('https://wallpaperscraft.com/image/field_dawn_sky_beautiful_scenery_87654_1920x1080.jpg');">
+        <div class="login-register" style="background-image:url('/assets/images/login_bg.jpg');">
             <div class="login-box card">
                 <div class="card-body">
                     <div class="row m-b-20">
