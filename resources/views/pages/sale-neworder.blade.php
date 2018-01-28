@@ -140,14 +140,14 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">ชื่อ</label>
-                                    <input type="text" id="firstName" class="form-control">
+                                    <input type="text" name="first_name" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">นามสกุล</label>
-                                    <input type="text" id="lastName" class="form-control">
+                                    <input type="text" name="last_name" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -166,7 +166,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">เบอร์โทร</label>
-                                    <input type="text" id="telNo" class="form-control">
+                                    <input type="text" name="tel_no" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-7">
