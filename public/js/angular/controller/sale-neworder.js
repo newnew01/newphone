@@ -23,6 +23,7 @@ app.controller('SaleNewOrderController', function($scope,$sce,$http) {
     $scope.source_branch = source_branch;
     $scope.discount = [];
     $scope.free_gift = [];
+    $scope.ais_deal = [];
 
     $scope.getTotal = function(){
         var total = 0;

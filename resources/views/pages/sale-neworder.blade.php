@@ -11,112 +11,119 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row" ng-controller="SaleNewOrderController">
-    <div class="col-md-12">
-        <div class="card card-outline-inverse">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">ข้อมูลสินค้า</h4>
-            </div>
-            <div class="card-body">
-                <div class="row p-t-20">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
-                                <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()">
-
-                                <span class="input-group-btn">
-                                    <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-
-                        <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#modal_amount_barcode">จำนวนมาก</button>
-                        <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
-
-                    </div>
-
-                    <table class="table color-table warning-table">
-                        <thead>
-                        <tr>
-                            <th width="30px">#</th>
-                            <th>สินค้า</th>
-                            <th width="70px" class="text-center">จำนวน</th>
-                            <th width="120px" class="text-center">ราคา/หน่วย</th>
-                            <th width="90px" class="text-center">ราคารวม</th>
-                            <th width="120px" class="text-center">ราคาสุทธิ</th>
-                            <th width="90px" class="text-center">ส่วนลด</th>
-                            <th width="90px" class="text-center">แถม</th>
-                            <th width="80px"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr ng-if="products.length == 0">
-                            <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
-                        </tr>
-
-                        <tr ng-repeat="product in products">
-                            <td><% $index+1 %></td>
-                            <td ><span class="tooltip_description" data-toggle="tooltip" title="<% product.description %>" tooltip><% product.product_name %> <% product.brand %> <% product.model %> <span ng-if="product.ais_deal == 1">(AIS deal)</span> <span ng-if="product.sn != ''">[<% product.sn %>]</span></span></td>
-                            <td class="text-center"><% product.count %></td>
-                            <td class="text-center"><% product.price %></td>
-                            <td class="text-center"><span><% (product.price*product.count) %></span></td>
-                            <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
-                            <td class="text-center">
-                                <input value='0' type="text" style="width: 100%" name="discount_<% $index %>" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" id="free_gift_<% $index %>" class="filled-in chk-col-red" name="free_gift_<% $index %>" ng-model="free_gift[$index]" />
-                                <label for="free_gift_<% $index %>"></label>
-                            </td>
-
-                            <td>
-                                <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
-                            </td>
-                        </tr>
-
-                        <tr  ng-if="false">
-                            <td></td>
-                            <td ></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center font-bold"><% getTotal()+getTotalDiscount() %></td>
-                            <td class="text-center font-bold"><% getTotal() %></td>
-                            <td class="text-center font-bold"><% getTotalDiscount() %></td>
-                            <td class="text-center"></td>
-                            <td></td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-
-                    <div class="col-md-12 text-right">
-                        <h3 class="p-r-20 font-bold">ราคาสุทธิ: <% getTotal() %></h3>
-                    </div>
-
-
-                </div>
-
-                <div class="form-group m-b-0 m-t-20">
-                    <div class="checkbox checkbox-success " style="display: inline">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1"> ออกใบเสร็จราคาเต็ม </label>
-                    </div>
-
-
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </div>
 
     <form method="post" action="/sale/neworder" style="width: 100%">
         {{ csrf_field() }}
+        <div class="col-md-12">
+            <div class="card card-outline-inverse">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">ข้อมูลสินค้า</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row p-t-20">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="mdi mdi-barcode"></i></div>
+                                    <input type="text" class="form-control" id="barcode_input" placeholder="บาร์โค้ด" style="" ng-model="barcode_input" ng-keyup="$event.keyCode == 13 && addProductToList()">
+
+                                    <span class="input-group-btn">
+                                        <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-success" ng-click="addProductToList()">ตกลง</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#modal_amount_barcode">จำนวนมาก</button>
+                            <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-info"><i class="mdi mdi-magnify"></i> ค้นหา</button>
+
+                        </div>
+
+                        <table class="table color-table warning-table">
+                            <thead>
+                            <tr>
+                                <th width="30px">#</th>
+                                <th>สินค้า</th>
+                                <th width="70px" class="text-center">จำนวน</th>
+                                <th width="120px" class="text-center">ราคา/หน่วย</th>
+                                <th width="90px" class="text-center">ราคารวม</th>
+                                <th width="120px" class="text-center">ราคาสุทธิ</th>
+                                <th width="90px" class="text-center">ส่วนลด</th>
+                                <th width="90px" class="text-center">แถม</th>
+                                <th width="80px"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-if="products.length == 0">
+                                <td colspan="8" class="text-center">ไม่มีข้อมูล</td>
+                            </tr>
+
+                            <tr ng-repeat="product in products">
+                                <td><% $index+1 %></td>
+                                <td ><span class="tooltip_description" data-toggle="tooltip" title="<% product.description %>" tooltip><% product.product_name %> <% product.brand %> <% product.model %> <span ng-if="product.ais_deal == 1">(AIS deal)</span> <span ng-if="product.sn != ''">[<% product.sn %>]</span></span></td>
+                                <td class="text-center"><% product.count %></td>
+                                <td class="text-center"><% product.price %></td>
+                                <td class="text-center"><span><% (product.price*product.count) %></span></td>
+                                <td class="text-center font-bold"><span ng-if="!free_gift[$index]"><% (product.price*product.count)-discount[$index] %></span><span ng-if="free_gift[$index]">0</span></td>
+                                <td class="text-center">
+                                    <input value='0' type="text" style="width: 100%" id="discount_<% $index %>" ng-model="discount[$index]" ng-if="!free_gift[$index]" ng-init="discount[$index] = 0">
+                                </td>
+                                <td class="text-center">
+                                    <input type="checkbox" id="free_gift_<% $index %>" class="filled-in chk-col-red" ng-model="free_gift[$index]"  ng-init="free_gift[$index] = false"/>
+                                    <label for="free_gift_<% $index %>"></label>
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn waves-effect waves-light btn-xs btn-danger" ng-click="removeFromList($index)">ลบ</button>
+                                </td>
+                            </tr>
+
+                            <tr  ng-if="false">
+                                <td></td>
+                                <td ></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center font-bold"><% getTotal()+getTotalDiscount() %></td>
+                                <td class="text-center font-bold"><% getTotal() %></td>
+                                <td class="text-center font-bold"><% getTotalDiscount() %></td>
+                                <td class="text-center"></td>
+                                <td></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="col-md-12 text-right">
+                            <h3 class="p-r-20 font-bold">ราคาสุทธิ: <% getTotal() %></h3>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group m-b-0 m-t-20">
+                        <div class="checkbox checkbox-success " style="display: inline">
+                            <input id="checkbox1" type="checkbox" name="invoice_full_price">
+                            <label for="checkbox1"> ออกใบเสร็จราคาเต็ม </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>หมายเหตุ</label>
+                        <textarea class="form-control" name="remark" rows="5"></textarea>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
 
 
         <div style="display: none" ng-repeat="product in products">
@@ -126,6 +133,7 @@
             <input type="hidden" name="count[]" value="<% product.count %>">
             <input type="hidden" name="discount[]" value="<% discount[$index] %>">
             <input type="hidden" name="free_gift[]" value="<% free_gift[$index] %>">
+            <input type="hidden" name="ais_deal[]" value="<% product.ais_deal %>">
 
         </div>
 
@@ -137,6 +145,15 @@
                 <div class="card-body">
                     <div class="form-body">
                         <div class="row p-t-20">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="checkbox checkbox-success " style="display: inline">
+                                        <input id="checkbox2" type="checkbox" name="no_customer_info">
+                                        <label for="checkbox2"> ขายสด (ไม่ระบุข้อมูลลูกค้า) </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="control-label">ชื่อ</label>
@@ -172,7 +189,7 @@
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <label class="control-label">วันเดือนปีเกิด</label>
-                                    <input type="text" class="form-control" placeholder="วว/ดด/ปปปป">
+                                    <input type="text" name="date_of_birth" class="form-control" placeholder="วว/ดด/ปปปป">
                                 </div>
                             </div>
                             <!--/span-->
@@ -186,7 +203,7 @@
                             <div class="col-md-12 ">
                                 <div class="form-group">
                                     <label>รายละเอียดที่อยู่</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="address" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -194,14 +211,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>ตำบล</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="tumbol" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>อำเภอ</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="ampher" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
@@ -211,14 +228,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>จังหวัด</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="province" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>รหัสไปรษณีย์</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="zip_code" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
@@ -226,10 +243,7 @@
                     </div>
 
 
-                    <div class="form-group">
-                        <label>หมายเหตุ</label>
-                        <textarea class="form-control" rows="5"></textarea>
-                    </div>
+
                 </div>
             </div>
 
@@ -242,7 +256,9 @@
                 </div>
             </div>
         </div>
+
     </form>
+
 
 
 
@@ -313,7 +329,16 @@
 
         $(document).ready(function () {
             $('#barcode_input').focus();
+
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
         });
+
+
 
     </script>
 @endsection

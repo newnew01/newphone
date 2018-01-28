@@ -18,10 +18,12 @@ class CreateInvoiceDetailTable extends Migration
             $table->timestamps();
             $table->string('invoice_id');
             $table->integer('product_id');
-            $table->double('discount');
-            $table->string('sn');
-            $table->integer('amount');
-            $table->boolean('free_gift');
+            $table->integer('price');
+            $table->double('discount')->default(0);
+            $table->string('sn')->nullable();
+            $table->integer('amount')->default(1);
+            $table->boolean('free_gift')->default(0);
+            $table->boolean('ais_deal')->default(false);
 
         });
     }

@@ -16,17 +16,18 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('invoice_id');
-            $table->string('customer_fname');
-            $table->string('customer_lname');
-            $table->char('gender',1);
-            $table->string('customer_address');
-            $table->string('customer_tumbol');
-            $table->string('customer_ampher');
-            $table->string('customer_province');
-            $table->string('customer_zipcode');
-            $table->string('customer_tel');
+            $table->string('customer_fname')->nullable();
+            $table->string('customer_lname')->nullable();
+            $table->integer('gender')->nullable();
+            $table->string('customer_address')->nullable();
+            $table->string('customer_tumbol')->nullable();
+            $table->string('customer_ampher')->nullable();
+            $table->string('customer_province')->nullable();
+            $table->string('customer_zipcode')->nullable();
+            $table->string('customer_tel')->nullable();
+            $table->text('remark')->nullable();
             $table->integer('employee_id');
+            $table->integer('branch_id');
         });
     }
 

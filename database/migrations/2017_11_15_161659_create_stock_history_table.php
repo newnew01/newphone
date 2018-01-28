@@ -18,7 +18,7 @@ class CreateStockHistoryTable extends Migration
             $table->timestamps();
             $table->integer('product_id');
             $table->string('sn')->nullable()->default(null);
-            $table->boolean('ais_deal')->default(0);
+            $table->boolean('ais_deal')->default(false);
             $table->integer('amount')->default(1);
             $table->integer('status');
             $table->integer('reference_id');

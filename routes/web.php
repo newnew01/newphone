@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/sale/neworder','SaleController@view_newOrder');
+    Route::get('/sale/{id}','SaleController@view_invoice');
 
     Route::post('/sale/neworder','SaleController@newOrder');
 
@@ -80,9 +81,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/service-product/find-product-amount-in-branch/{id},{branch_id}','ServiceProductController@findProductAmountInBranch');
 
 });
-
-
-
 
 
 
@@ -119,7 +117,10 @@ Route::get('/test_barcode', function()
 Route::get('/test_invoice', function()
 {
 
-    return view('pages.stock-in-document');
+    $invoice = \App\Invoice::find(1);
+    $ref_id_barcode = DNS1D::getBarcodePNG(sprintf('%06d', 1), "C128");
+
+    return view('pages.sale-invoice-document')->with(compact('invoice'))->with(compact('ref_id_barcode'));
 });
 Auth::routes();
 

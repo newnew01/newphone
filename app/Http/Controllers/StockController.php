@@ -277,7 +277,7 @@ class StockController extends Controller
         }
     }
 
-    public function createStockReference($ref_type,$emp_id,$source_branch_id,$dest_branch_id,$doc_ref = null,$status_id = 1)
+    public static function createStockReference($ref_type,$emp_id,$source_branch_id,$dest_branch_id,$doc_ref = null,$status_id = 1)
     {
         $stock_ref = new StockReference();
         $stock_ref->employee_id = $emp_id;
@@ -293,17 +293,17 @@ class StockController extends Controller
 
 
 
-    public function createStockInReference($branch_id,$emp_id)
+    public static function createStockInReference($branch_id,$emp_id)
     {
-        return $this->createStockReference(self::REF_TYPE_STOCKIN,$emp_id,$branch_id,$branch_id);
+        return StockController::createStockReference(self::REF_TYPE_STOCKIN,$emp_id,$branch_id,$branch_id);
     }
 
-    public function createStockTransferReference($source_branch,$dest_branch,$emp_id)
+    public static function createStockTransferReference($source_branch,$dest_branch,$emp_id)
     {
-        return $this->createStockReference(self::REF_TYPE_STOCKTRANSFER,$emp_id,$source_branch,$dest_branch);
+        return StockController::createStockReference(self::REF_TYPE_STOCKTRANSFER,$emp_id,$source_branch,$dest_branch);
     }
 
-    public function createStockHistory($ref_id,$product_id,$amount=1,$type_sn=0,$sn=null,$ais_deal=false,$status=1)
+    public static function createStockHistory($ref_id,$product_id,$amount=1,$type_sn=0,$sn=null,$ais_deal=false,$status=1)
     {
         $stock_history = new StockHistory();
         $stock_history->product_id = $product_id;
@@ -323,10 +323,63 @@ class StockController extends Controller
         return $stock_history->id;
     }
 
-    public function createStockHistoryWithSN($ref_id, $product_id, $sn, $ais_deal)
+    public static function createStockHistoryWithSN($ref_id, $product_id, $sn, $ais_deal)
     {
-        return $this->createStockHistory($ref_id,$product_id,1,1,$sn,$ais_deal);
+        return StockController::createStockHistory($ref_id,$product_id,1,1,$sn,$ais_deal);
     }
+
+    public static function deleteProductAmount($product_id, $amount, $branch_id)
+    {
+        $product_amount = ProductAmount::where('product_id','=',$product_id)->where('branch_id','=',$branch_id);
+        if($product_amount->exists()){
+            $product_amount = $product_amount->first();
+            $product_amount->amount -= $amount;
+            $product_amount->save();
+
+            $product = Product::find($product_id);
+            $product->amount -= $amount;
+            $product->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function deleteProductSN($product_id, $product_sn, $branch_id)
+    {
+        $product_sn = ProductSN::where('product_id','=',$product_id)->where('sn','=',$product_sn)->where('branch_id','=',$branch_id);
+
+        if($product_sn->exists()){
+            $product_sn = $product_sn->first();
+            $product_sn->delete();
+
+            $product = Product::find($product_id);
+            $product->amount -= 1;
+            $product->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function transferProductSN($product_id, $product_sn, $source_branch_id,$dest_branch_id)
+    {
+        $product_sn = ProductSN::where('product_id','=',$product_id)->where('sn','=',$product_sn)->where('branch_id','=',$source_branch_id);
+
+        if($product_sn->exists()){
+            $product_sn = $product_sn->first();
+            $product_sn->branch_id = $dest_branch_id;
+            $product_sn->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
 }
